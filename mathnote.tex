@@ -26,14 +26,14 @@
 }
 % abbr
 \newcommand\st{\quad \text{s.t.} \quad}
+\newcommand\diff{\,\mathrm{d}}
 % declare \norm macro
 \DeclarePairedDelimiter{\norm}\lVert\rVert
 \DeclarePairedDelimiter{\set}\lbrace\rbrace
+\DeclarePairedDelimiter{\abs}\lvert\rvert
 % Functional Analysis Symbols
 \def\L{\mathcal{L}}
 \def\R{\mathbb{R}}
-\def\bimplies{\Longleftrightarrow}
-\def\implies{\Longrightarrow}
 
 \begin{document}
 \part{Functional Analysis}
@@ -54,13 +54,13 @@
     \end{equation}
     Def $A \in \L(X,Y)$
     \begin{align}
-        \norm{A}_{\L(X,Y)}=\inf\set{M:\eqref{eq:linear opeartor bounded} \text{ holds}} \bimplies \\
+        \norm{A}_{\L(X,Y)}=\inf\set{M:\eqref{eq:linear opeartor bounded} \text{ holds}} \iff \\
         \norm{A}_{\L(X,Y)}=\sup_{x \neq 0}\frac{\norm{Ax}_Y}{\norm{x}_X}=\sup_{\norm{x}_X=1}\norm{Ax}_Y
     \end{align}
 \end{myDef}
 \begin{proof}
     \begin{align*}
-        \eqref{eq:linear opeartor bounded} \bimplies \frac{\norm{Ax}_Y}{\norm{x}_X} \leq M, x \neq 0 \\
+        \eqref{eq:linear opeartor bounded} \iff \frac{\norm{Ax}_Y}{\norm{x}_X} \leq M, x \neq 0 \\
         \implies \inf{M} = \exists \sup_{x \neq 0}\frac{\norm{Ax}_Y}{\norm{x}_X}                     \\
         = \sup_{x \neq 0}\norm{A\frac{x}{\norm{x}_X}}_Y = \sup_{\norm{x}_X=1}\norm{Ax}_Y
     \end{align*}
@@ -69,9 +69,57 @@
     $Y \in$ Banach space $\implies \L(X,Y) \in$ Banach space.
 \end{prop}
 \begin{proof}
-    Let $A_n$ be Cauchy $\subset \L(X,Y). \implies$
-    \begin{align}
-        \norm{A_n -}
-    \end{align}
+    Let $\set{A_n}$ be Cauchy $\subset \L(X,Y). \implies$
+    \begin{gather}
+        \norm{A_n - A_m}_{op} \leq \epsilon, \forall n,m \geq N.
+        \intertext{$\forall$ fixed $x \in X$.}
+        \norm{A_nx-A_mx}_Y=\norm{(A_n-A_m)x}_Y \leq \norm{A_n-A_m}_{op}\norm{x}_X,
+        \intertext{$\implies \set{A_nx}$ is Cauchy. Since $Y$ is complete $\implies$}
+        A_nx \to y(x), \notag
+        \intertext{def $A:X \to Y$, $Ax \mapsto y$. $A \in \L(X,Y)$: }
+        A(x+\lambda y) = \lim_{n \to \infty}A_n(x + \lambda y)
+        = \lim_{n \to \infty}A_nx + \lambda \lim_{n \to \infty}A_ny = Ax+\lambda Ay. \notag
+        \intertext{$n,m \geq N, n \to \infty, \implies$}
+        \norm{Ax-A_nx}_Y \leq \epsilon(x) \leq \epsilon \norm{x}_X.
+        \intertext{$A$ is bounded, and}
+        \norm{A_n - A}_{op} \leq \epsilon,
+    \end{gather}
+    $\implies A_n \to A \in \L(X,Y)$.
+\end{proof}
+
+\begin{prop}
+    $L: X \to Y$ be a linear map, $L$ continuous $\iff$ $L$ bounded.
+\end{prop}
+\begin{proof}
+    ($\impliedby$)
+    \begin{gather*}
+        \norm{L(x_n - x)}_Y \leq \norm{L}_{op}\norm{x_n - x}_X,
+    \end{gather*}
+    ($\implies$) If $L$ continuous but unbounded then $\forall n, \exists y_n$ s.t. $\norm{Ly_n}_Y > n^2\norm{y_n}_X$. Then
+    \begin{gather*}
+        x_n = y_n/(n\norm{y_n}_X) \to 0,
+    \end{gather*}
+    but $\norm{Lx_n}_Y > 0, \implies L$ is not continuous, a contradiction.
+\end{proof}
+
+\begin{lemma}
+    Let $k(x,y) \in L^2(\Omega \times \Omega)$:
+    \begin{gather*}
+        \int_{\Omega}\int_{\Omega}\abs{k(x,y)}^2 \diff x \diff y = C^2 < \infty.
+    \end{gather*}
+    Integral operator $K: L^2(\Omega) \to L^2(\Omega)$ defined by
+    \begin{gather}
+        [Ku](x)=\int_{\Omega}k(x,y)u(y) \diff y
+    \end{gather}
+    is bounded.
+\end{lemma}
+\begin{proof}
+    Use C-S inequality
+    \begin{align*}
+        \abs{Ku}^2 &= \int_{\Omega}(\int_{\Omega}k(x,y)u(y) \diff y)^2 \diff x \\
+        &\leq \int_{\Omega}(\int_{\Omega}\abs{k(x,y)}^2 \diff y)(\int_{\Omega}\abs{u(y)}^2 \diff y)\diff x \\
+        &= (\int_{\Omega}\int_{\Omega}\abs{k(x,y)}^2 \diff x \diff y)(\int_{\Omega}\abs{u(y)}^2 \diff y) \\
+        &= C^2 \abs{u}^2
+    \end{align*}
 \end{proof}
 \end{document}
