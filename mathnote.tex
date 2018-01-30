@@ -1,0 +1,77 @@
+\documentclass[a4paper]{book}
+
+%  math support
+\usepackage{mathtools}
+\usepackage[thmmarks,amsmath]{ntheorem}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{hyperref}
+
+% theorems
+\newtheorem{thm}{Theorem}[chapter]
+\newtheorem{defi}[thm]{Definition}
+\newtheorem{lemma}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+{
+    \theoremstyle{nonumberplain}
+    \theoremheaderfont{\normalfont}
+    \theorembodyfont{\normalfont}
+    % auto add \QED
+    \theoremsymbol{\mbox{$\Box$}}
+    \newtheorem{proof}{proof}
+}
+{
+    \theoremstyle{nonumberplain}
+    \newtheorem{myDef}{Definition}
+}
+% abbr
+\newcommand\st{\quad \text{s.t.} \quad}
+% declare \norm macro
+\DeclarePairedDelimiter{\norm}\lVert\rVert
+\DeclarePairedDelimiter{\set}\lbrace\rbrace
+% Functional Analysis Symbols
+\def\L{\mathcal{L}}
+\def\R{\mathbb{R}}
+\def\bimplies{\Longleftrightarrow}
+\def\implies{\Longrightarrow}
+
+\begin{document}
+\part{Functional Analysis}
+\chapter{Banach and Hilbert Spaces}
+\chapter{ODEs}
+\chapter{Linear Operators}
+\begin{myDef}[linear]
+    An operator $A$ on a vector space is \emph{linear} if
+    \[
+        A(x+\lambda y)=Ax+\lambda Ay, \forall x, y \in V \text{ and } \lambda \in \R.
+    \]
+\end{myDef}
+\section{Bounded Linear Operators on Banach Spaces}
+\begin{myDef}
+    A linear operator $A: X \to Y$ is bounded if $\exists M$ s.t.
+    \begin{equation}\label{eq:linear opeartor bounded}
+        \norm{Ax}_Y \leq M \norm{x}_X, \forall x \in X.
+    \end{equation}
+    Def $A \in \L(X,Y)$
+    \begin{align}
+        \norm{A}_{\L(X,Y)}=\inf\set{M:\eqref{eq:linear opeartor bounded} \text{ holds}} \bimplies \\
+        \norm{A}_{\L(X,Y)}=\sup_{x \neq 0}\frac{\norm{Ax}_Y}{\norm{x}_X}=\sup_{\norm{x}_X=1}\norm{Ax}_Y
+    \end{align}
+\end{myDef}
+\begin{proof}
+    \begin{align*}
+        \eqref{eq:linear opeartor bounded} \bimplies \frac{\norm{Ax}_Y}{\norm{x}_X} \leq M, x \neq 0 \\
+        \implies \inf{M} = \exists \sup_{x \neq 0}\frac{\norm{Ax}_Y}{\norm{x}_X}                     \\
+        = \sup_{x \neq 0}\norm{A\frac{x}{\norm{x}_X}}_Y = \sup_{\norm{x}_X=1}\norm{Ax}_Y
+    \end{align*}
+\end{proof}
+\begin{prop}
+    $Y \in$ Banach space $\implies \L(X,Y) \in$ Banach space.
+\end{prop}
+\begin{proof}
+    Let $A_n$ be Cauchy $\subset \L(X,Y). \implies$
+    \begin{align}
+        \norm{A_n -}
+    \end{align}
+\end{proof}
+\end{document}
