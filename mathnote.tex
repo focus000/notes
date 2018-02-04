@@ -34,20 +34,25 @@
 % Functional Analysis Symbols
 \def\L{\mathcal{L}}
 \def\R{\mathbb{R}}
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Ker}{Ker}
+% domain range
+\DeclareMathOperator{\domain}{D}
+\DeclareMathOperator{\range}{R}
 
 \begin{document}
 \part{Functional Analysis}
 \chapter{Banach and Hilbert Spaces}
 \chapter{ODEs}
 \chapter{Linear Operators}
-\begin{myDef}[linear]
+\begin{myDef}[Linear]
     An operator $A$ on a vector space is \emph{linear} if
     \[
         A(x+\lambda y)=Ax+\lambda Ay, \forall x, y \in V \text{ and } \lambda \in \R.
     \]
 \end{myDef}
 \section{Bounded Linear Operators on Banach Spaces}
-\begin{myDef}
+\begin{myDef}[Bounded]
     A linear operator $A: X \to Y$ is bounded if $\exists M$ s.t.
     \begin{equation}\label{eq:linear opeartor bounded}
         \norm{Ax}_Y \leq M \norm{x}_X, \forall x \in X.
@@ -121,5 +126,35 @@
         &= (\int_{\Omega}\int_{\Omega}\abs{k(x,y)}^2 \diff x \diff y)(\int_{\Omega}\abs{u(y)}^2 \diff y) \\
         &= C^2 \abs{u}^2
     \end{align*}
+\end{proof}
+\section{Domain, Range, Kernel, and the Inverse Operator}
+% TODO: bounded linear operator : D(A)=X by hahn-banach thm from chapter 4, while the domain is an intrinsic part of the def of unbounded operators
+\begin{myDef}[inverse]
+    $A$ is inverse if
+    \begin{gather*}
+        Ax = y
+    \end{gather*}
+    has a unique solution, $\forall y \in \range(A)$. Define $A^{-1}y=x$. Easy check:
+    \begin{gather*}
+        AA^{-1}u=u, \forall u \in \range(A) \text{ and } A^{-1}Au=u, \forall u \in \domain(A).
+    \end{gather*}
+    If $A$ is linear and $A^{-1}$ exist then it is linear too.    
+\end{myDef}
+\begin{proof}
+    $\forall x,y \in \range(A), \exists x', y' \in \domain(A)$ s.t.$Ax'=x, Ay'=y$.
+    \begin{align*}
+        A^{-1}(x+\lambda y)&=A^{-1}(Ax'+\lambda Ay')=A^{-1}A(x'+\lambda y') \\
+        &=x'+\lambda y'=A^{-1}x+\lambda A^{-1}y.
+    \end{align*}
+\end{proof}
+\begin{lemma}
+    $A$ is invertible iff $\Ker (A) = \set{0}$.
+\end{lemma}
+\begin{proof}
+    ($\implies$), $Ax=y$ has unique solution $\forall y \in \range(A)$.
+    If $\exists 0 \neq z \in \Ker(A)$, then $A(x+z)=y$ also, so $\Ker(A)$ must be $\set{0}$.\\
+    ($\impliedby$), if $A$ is not invertible 
+    $\implies \exists y \in \range(A), x_1 \neq x_2 \in \domain(A)$ s.t.
+    $Ax_1=y, Ax_2=y. \implies A(x_1-x_2)=0 \implies 0 \neq x_1-x_2 \in \Ker(A)$. 
 \end{proof}
 \end{document}
