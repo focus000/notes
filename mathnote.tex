@@ -12,6 +12,7 @@
 \newtheorem{defi}[thm]{Definition}
 \newtheorem{lemma}[thm]{Lemma}
 \newtheorem{prop}[thm]{Proposition}
+\newtheorem{coro}[thm]{Corollary}
 {
     \theoremstyle{nonumberplain}
     \theoremheaderfont{\normalfont}
@@ -157,4 +158,88 @@
     $\implies \exists y \in \range(A), x_1 \neq x_2 \in \domain(A)$ s.t.
     $Ax_1=y, Ax_2=y. \implies A(x_1-x_2)=0 \implies 0 \neq x_1-x_2 \in \Ker(A)$. 
 \end{proof}
+\section{The Baire Category Theorem}
+\begin{thm}[Baire Category Theorem]
+    If $G_i$ is a countable family of dense open subsets of a Banach space $X$ then
+    \begin{equation*}
+        G = \bigcap_{n=1}^\infty G_n
+    \end{equation*}
+    is dense in $X$.
+\end{thm}
+\begin{proof}
+    $\overline G = X \iff \forall x \in X$, and $r>0$, $B(x,r) \cap G \neq \emptyset$\\
+    since $\forall G_n$ is dense and open, $\exists y \in G_n, s>0$,
+    \begin{equation*}
+        B(x,r)\cap G_n \supset B(y,2s) \supset \overline{B}(y,s).
+    \end{equation*}
+    $\exists x_1 \in X, r_1 < 2^{-1} \text{ s.t. } \overline{B}(x_1,r_1) \subset G_1 \cap B(x,r)$\\
+    $\exists x_2 \in X, r_2 < 2^{-2} \text{ s.t. } \overline{B}(x_2,r_2) \subset G_2 \cap B(x_1,r_1)$\\
+    $\cdots$\\
+    $\exists x_n \in X, r_n < 2^{-n} \text{ s.t. } \overline{B}(x_n,r_n) \subset G_n \cap B(x_{n-1},r_{n-1})$.\\
+    $\implies$
+    \begin{gather}
+        \overline{B}(x_1,r_1) \supset \overline{B}(x_2,r_2) \supset \cdots .
+    \end{gather}
+    Since the space is complete,
+    \begin{gather*}
+        \bigcap_{n=1}^\infty \overline{B}(x_n,r_n)=x_0.
+    \end{gather*}
+    $\implies x_0 \in \overline{B}(x_1,r_1) \subset B(x,r)$ and $x_0 \in \overline{B}(x_n,r_n) \subset G_n, \forall n. $\\
+    $\implies x_0 \in B(x,r) \cap G$.
+\end{proof}
+\begin{myDef}[nowhere dense]
+    $W$ is nowhere dense if $\overline{W}^\circ = \emptyset$.
+\end{myDef}
+\begin{coro}\label{Baire Category thm coro}
+    Let $X$ be a Banach space and $F_j$ be a countable sequence of nowhere dense subsets. Then
+    \begin{gather*}
+        \bigcup_{j=1}^\infty F_j \neq X.
+    \end{gather*}
+\end{coro}
+\begin{proof}
+    Suppose $\bigcup_{j=1}^\infty F_j = X$,
+    \begin{gather*}
+        X=\overline{\bigcap_{j=1}^\infty{X \setminus \overline{F_j}}}=\overline{X \setminus \overline{\bigcup_{j=1}^\infty F_j}} \subset \overline{X \setminus \bigcup_{j=1}^\infty F_j} = \emptyset.
+    \end{gather*}
+    Contradiction!
+\end{proof}
+\begin{thm}[Uniform Boundedness Principle]
+    Let $X$ be a Banach space and $Y$ a normed space. Let $S \subset \L(X,Y)$, and let
+    \begin{equation*}
+        \sup_{T \in S}\norm{Tx}_Y < \infty \text{ for all } x \in X.
+    \end{equation*}
+    Then
+    \begin{equation*}
+        \sup_{T \in S}\norm{T}_{\L(X,Y)} < \infty.
+    \end{equation*}
+\end{thm}
+\begin{proof}
+    Define
+    \begin{equation*}
+        F_j=\set{x \in X:\norm{Tx}_Y \leq j, \forall T \in S}.
+    \end{equation*}
+    $\implies$ $\bigcup_j{F_j}=X$.
+    \begin{gather*}
+        X \setminus F_j = \set{x \in X : \norm{T_x x}_Y > j, \exists T_x \in S},
+        \intertext{$\forall x_0 \in X \setminus F_j$, $\forall \epsilon > 0, \text{ let } \delta = \frac{\epsilon}{\norm{T}_{\L(X,Y)}},\forall x \in B(x_0, \delta)$ s.t.}
+        \norm{T_{x_0}x-T_{x_0}x_0}=\norm{T_{x_0}(x-x_0)} \leq \norm{T}_{\L(X,Y)}\norm{x-x_0} <\epsilon.
+    \end{gather*}
+    let $\epsilon = \epsilon_0 = \norm{j - x_0}/2$, $\implies B(x_0,\delta_0) \subset X \setminus F_j$, \\
+    $\implies F_j$ is closed.\\
+    $\overset{\ref{Baire Category thm coro}}{\implies} F_n^\circ \neq \emptyset$ for some $n$\\
+    Then $\exists y \in X, r > 0$ s.t.
+    \begin{equation*}
+        B(y,r) \subset F_n.
+    \end{equation*}
+    Therefore, if $\norm{x}_X \leq r$,
+    \begin{equation*}
+        \norm{Tx}_Y=\norm{T(x+y)+T(-y)} \leq n +\norm{Ty}_Y \leq 2n,
+    \end{equation*}
+    since $\sup_{T \in S}\norm{Ty}_Y < \infty, \forall x : \norm{x}_X=r \implies$
+    \begin{equation*}
+        \norm{Tx}_Y \leq \frac{2n}{r}\norm{x}_X, \text{ for all }T \in S,
+    \end{equation*}
+    since $T$ is linear, this follows for all $x$.
+\end{proof}
+% TODO: app ex 3.4
 \end{document}
