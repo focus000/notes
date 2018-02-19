@@ -2,9 +2,10 @@
 
 %  math support
 \usepackage{mathtools}
+\usepackage{extarrows}
 \usepackage[thmmarks,amsmath]{ntheorem}
 \usepackage{amssymb}
-\usepackage{amsmath}
+% \usepackage{amsmath}
 \usepackage{hyperref}
 
 % theorems
@@ -28,6 +29,9 @@
 % abbr
 \newcommand\st{\quad \text{s.t.} \quad}
 \newcommand\diff{\,\mathrm{d}}
+\newcommand\compact{\subset \subset}
+\newcommand\xiff\xLongleftrightarrow
+
 % declare \norm macro
 \DeclarePairedDelimiter{\norm}\lVert\rVert
 \DeclarePairedDelimiter{\set}\lbrace\rbrace
@@ -226,7 +230,7 @@
     \end{gather*}
     let $\epsilon = \epsilon_0 = \norm{j - x_0}/2$, $\implies B(x_0,\delta_0) \subset X \setminus F_j$, \\
     $\implies F_j$ is closed.\\
-    $\overset{\ref{Baire Category thm coro}}{\implies} F_n^\circ \neq \emptyset$ for some $n$\\
+    $\overset{\ref{Baire Category thm coro}}{\implies} F_n^\circ \neq \emptyset$ for some $n$\\
     Then $\exists y \in X, r > 0$ s.t.
     \begin{equation*}
         B(y,r) \subset F_n.
@@ -242,4 +246,13 @@
     since $T$ is linear, this follows for all $x$.
 \end{proof}
 % TODO: app ex 3.4
+\section{Compact Operators}
+\begin{defi}
+    An opeartor $K:X \to Y$ is compact if
+    \begin{equation*}
+        \overline{K((W < \infty) \subset X)} \compact Y.
+    \end{equation*}
+    $\xiff{\text{usually used}} \forall (\set{x_n} < \infty) \subset X, \exists \set{Kx_{n_j}}$ converge.
+\end{defi}
+
 \end{document}
