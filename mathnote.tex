@@ -2,6 +2,7 @@
 
 %  math support
 \usepackage{mathtools}
+\usepackage{autobreak}
 \usepackage{extarrows}
 \usepackage[thmmarks,amsmath]{ntheorem}
 \usepackage{amssymb}
@@ -31,6 +32,8 @@
 \newcommand\diff{\,\mathrm{d}}
 \newcommand\compact{\subset \subset}
 \newcommand\xiff\xLongleftrightarrow
+\newcommand\ximpliedby\xLongleftarrow
+\newcommand\ximplies\xLongrightarrow
 
 % declare \norm macro
 \DeclarePairedDelimiter{\norm}\lVert\rVert
@@ -38,9 +41,11 @@
 \DeclarePairedDelimiter{\abs}\lvert\rvert
 % Functional Analysis Symbols
 \def\L{\mathcal{L}}
+\def\K{\mathcal{K}}
 \def\R{\mathbb{R}}
 \DeclareMathOperator{\Ima}{Im}
 \DeclareMathOperator{\Ker}{Ker}
+% \DeclareMathOperator{\dim}{dim}
 % domain range
 \DeclareMathOperator{\domain}{D}
 \DeclareMathOperator{\range}{R}
@@ -58,13 +63,13 @@
 \end{myDef}
 \section{Bounded Linear Operators on Banach Spaces}
 \begin{myDef}[Bounded]
-    A linear operator $A: X \to Y$ is bounded if $\exists M$ s.t.
+    A linear operator $A \colon X \to Y$ is bounded if $\exists M$ s.t.
     \begin{equation}\label{eq:linear opeartor bounded}
         \norm{Ax}_Y \leq M \norm{x}_X, \forall x \in X.
     \end{equation}
     Def $A \in \L(X,Y)$
     \begin{align}
-        \norm{A}_{\L(X,Y)}=\inf\set{M:\eqref{eq:linear opeartor bounded} \text{ holds}} \iff \\
+        \norm{A}_{\L(X,Y)}=\inf\set{M \colon \eqref{eq:linear opeartor bounded} \text{ holds}} \iff \\
         \norm{A}_{\L(X,Y)}=\sup_{x \neq 0}\frac{\norm{Ax}_Y}{\norm{x}_X}=\sup_{\norm{x}_X=1}\norm{Ax}_Y
     \end{align}
 \end{myDef}
@@ -75,7 +80,7 @@
         = \sup_{x \neq 0}\norm{A\frac{x}{\norm{x}_X}}_Y = \sup_{\norm{x}_X=1}\norm{Ax}_Y
     \end{align*}
 \end{proof}
-\begin{prop}
+\begin{prop}\label{completeness_of_linear_operator}
     $Y \in$ Banach space $\implies \L(X,Y) \in$ Banach space.
 \end{prop}
 \begin{proof}
@@ -86,7 +91,7 @@
         \norm{A_nx-A_mx}_Y=\norm{(A_n-A_m)x}_Y \leq \norm{A_n-A_m}_{op}\norm{x}_X,
         \intertext{$\implies \set{A_nx}$ is Cauchy. Since $Y$ is complete $\implies$}
         A_nx \to y(x), \notag
-        \intertext{def $A:X \to Y$, $Ax \mapsto y$. $A \in \L(X,Y)$: }
+        \intertext{def $A \colon X \to Y$, $Ax \mapsto y$. $A \in \L(X,Y)$: }
         A(x+\lambda y) = \lim_{n \to \infty}A_n(x + \lambda y)
         = \lim_{n \to \infty}A_nx + \lambda \lim_{n \to \infty}A_ny = Ax+\lambda Ay. \notag
         \intertext{$n,m \geq N, n \to \infty, \implies$}
@@ -98,7 +103,7 @@
 \end{proof}
 
 \begin{prop}
-    $L: X \to Y$ be a linear map, $L$ continuous $\iff$ $L$ bounded.
+    $L \colon X \to Y$ be a linear map, $L$ continuous $\iff$ $L$ bounded.
 \end{prop}
 \begin{proof}
     ($\impliedby$)
@@ -112,12 +117,12 @@
     but $\norm{Lx_n}_Y > 0, \implies L$ is not continuous, a contradiction.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{boundness_of_integral_operator}
     Let $k(x,y) \in L^2(\Omega \times \Omega)$:
     \begin{gather*}
         \int_{\Omega}\int_{\Omega}\abs{k(x,y)}^2 \diff x \diff y = C^2 < \infty.
     \end{gather*}
-    Integral operator $K: L^2(\Omega) \to L^2(\Omega)$ defined by
+    Integral operator $K \colon L^2(\Omega) \to L^2(\Omega)$ defined by
     \begin{gather}
         [Ku](x)=\int_{\Omega}k(x,y)u(y) \diff y
     \end{gather}
@@ -220,11 +225,11 @@
 \begin{proof}
     Define
     \begin{equation*}
-        F_j=\set{x \in X:\norm{Tx}_Y \leq j, \forall T \in S}.
+        F_j=\set{x \in X \colon \norm{Tx}_Y \leq j, \forall T \in S}.
     \end{equation*}
     $\implies$ $\bigcup_j{F_j}=X$.
     \begin{gather*}
-        X \setminus F_j = \set{x \in X : \norm{T_x x}_Y > j, \exists T_x \in S},
+        X \setminus F_j = \set{x \in X  \colon \norm{T_x x}_Y > j, \exists T_x \in S},
         \intertext{$\forall x_0 \in X \setminus F_j$, $\forall \epsilon > 0, \text{ let } \delta = \frac{\epsilon}{\norm{T}_{\L(X,Y)}},\forall x \in B(x_0, \delta)$ s.t.}
         \norm{T_{x_0}x-T_{x_0}x_0}=\norm{T_{x_0}(x-x_0)} \leq \norm{T}_{\L(X,Y)}\norm{x-x_0} <\epsilon.
     \end{gather*}
@@ -239,7 +244,7 @@
     \begin{equation*}
         \norm{Tx}_Y=\norm{T(x+y)+T(-y)} \leq n +\norm{Ty}_Y \leq 2n,
     \end{equation*}
-    since $\sup_{T \in S}\norm{Ty}_Y < \infty, \forall x : \norm{x}_X=r \implies$
+    since $\sup_{T \in S}\norm{Ty}_Y < \infty, \forall x  \colon \norm{x}_X=r \implies$
     \begin{equation*}
         \norm{Tx}_Y \leq \frac{2n}{r}\norm{x}_X, \text{ for all }T \in S,
     \end{equation*}
@@ -247,12 +252,101 @@
 \end{proof}
 % TODO: app ex 3.4
 \section{Compact Operators}
-\begin{defi}
-    An opeartor $K:X \to Y$ is compact if
+\begin{defi}\label{compact_opeartor}
+    An opeartor $K \colon X \to Y$ is compact if
     \begin{equation*}
         \overline{K((W < \infty) \subset X)} \compact Y.
     \end{equation*}
     $\xiff{\text{usually used}} \forall (\set{x_n} < \infty) \subset X, \exists \set{Kx_{n_j}}$ converge.
 \end{defi}
+\begin{lemma}
+    A compact operator is bounded.
+\end{lemma}
+\begin{proof}
+    $(B_X(0,1)<\infty) \subset X \ximplies[\text{def } \ref{compact_opeartor}]{K \text{ is compact}} \overline{K(B)} \compact{Y} \implies \overline{K(B)} \subset B_Y(0,R)$, thus
+    \begin{equation*}
+        \sup_{\norm{x}_X \leq 1}\norm{K(x)}_Y \leq R.
+    \end{equation*}
+\end{proof}
 
+The space of all compact linear opeartors from norm space $X$ into Banach space $Y$, $(\K(X,Y),\norm{\cdot}_{op})$ is a Banach space (cf. Proposition \ref{completeness_of_linear_operator}):
+\begin{thm}\label{completeness_of_compact_linear_operator_s1}
+    Let $X$ be a norm space and $Y$ be a Banach space, if $({K_n} \compact{\L(X,Y)}) \to K \in \L(X,Y)$, i.e.
+    \begin{equation*}
+        \sup_{\norm{x}_X = 1}\norm{K_n{x} - K{x}}_Y \to 0 \text{ as } n \to 0,
+    \end{equation*}
+    then $K \compact{\L(X,Y)}$.
+\end{thm}
+\begin{proof}
+    we could use Cantor's diagonal argument to find $(\set{y_j} < \infty) \subset X$ s.t. $\forall n$, $K_n(y_j)$ converge. Now show that $K(y_j)$ is Cauchy,
+    \begin{gather*}
+        \norm{K(y_i)-K(y_j)}_Y \leq \norm{K(y_i) - K_n(y_i)} + \norm{K_n(y_i)-K_n(y_j)} + \norm{K_n(y_j) - K(y_j)},
+        \intertext{since $\set{y_j} < \infty$ and $K_n \to K$, pick $n$ large enough that}
+        \norm{K(y_j)-K_n(y_j)}_Y \leq \epsilon /3, \quad \forall y_j.
+        \intertext{For such an $n$, $\set{K_n(y_j)}$ is Cauchy, so $\exists N$, $i,j \geq N$ s.t.}
+        \norm{K_n(y_i)-K_n(y_j)}_Y \leq \epsilon /3.
+        \intertext{$\implies$}
+        \norm{K(y_i)-K(y_j)}_Y \leq \epsilon, \quad i,j \geq N,
+    \end{gather*}
+    and $\set{K(y_j)}$ is Cauchy. Since $Y$ is complete, $K \compact{\L(X,Y)}$.
+\end{proof}
+\begin{coro}
+    $X$ norm space and $Y$ Banach space $\implies \K(X,Y)$ Banach space.
+\end{coro}
+\begin{proof}
+    Let $((\set{K_n} \text{ is Cauchy with } \norm{\cdot}_{op}) \subset \K(X,Y) )\subset \L(X,Y), \\ \ximplies{\text{prop} \ref{completeness_of_linear_operator}} K_n \to K \subset \L(X,Y) \ximplies{\text{thm} \ref{completeness_of_compact_linear_operator_s1}} K \in \K(X,Y).$
+\end{proof}
+\begin{lemma}\label{bounded_op_with_finite-dim_range_is_compact}
+    Let $(A \colon X \to Y) < \infty$, if $R(A)$ is finite-dimensional, then $A$ is compact.
+\end{lemma}
+% TODO: why not necessary linear
+\begin{proof}
+    Let $(\set{u_n} \subset D(A)) < \infty \ximplies{A < \infty} (\set{Au_n} \subset R(A)) < \infty \\ \ximplies[\text{finite-dimensional}]{R(A) \text{ is}} Au_{n_i}$ converge, and so $A$ is compact.
+\end{proof}
+\begin{prop}
+    The integral opeartor $K \colon L^2(\Omega) \to L^2(\Omega)$ given by
+    \begin{equation*}
+        [Ku](x)=\int_{\Omega}k(x,y)u(y)dy,
+    \end{equation*}
+    where $k \in L^2(\Omega \times \Omega)$ is compact.
+\end{prop}
+\begin{proof}
+    We need find $K_n$ s.t. $((\set{K_n} < \infty) \subset \K(L^2(\Omega),L^2(\Omega))) \to K$, use Lemma \ref{bounded_op_with_finite-dim_range_is_compact} prove $K_n$ is compact, then use Theorem \ref{completeness_of_compact_linear_operator_s1} prove $K$ is compact.
+    Since $\dim(R(K_n)) < \infty$ while $\dim(R(K))$ is infinity, $\dim(R(K_n)) \to \infty$, for $n \to \infty$.\\
+    Let $\set{\phi_j}$ be an orthonormal basis for $L^2(\Omega)$. Then $\set{\phi_i(x)\phi_j(y)}$ is an orthonormal basis for $L^2(\Omega \times \Omega)$,then
+    \begin{equation*}
+        k(x,y)=\sum_{i,j=1}^{\infty}k_{ij}\phi_i(x)\phi_j(y),
+    \end{equation*}
+    where
+    % TODO: proof basis ex 3.5 fix x consider L^2(\Omega)
+    \begin{equation*}
+        k_{ij}=\int_{\Omega \times \Omega}k(x,y)\phi_i(x)\phi_j(y) \diff x \diff y.
+    \end{equation*}
+    Since $\set{\phi_i(x)\phi_j(y)}$ is a basis, we have
+    \begin{equation}
+        \norm{k}_{L^2(\Omega \times \Omega)}^2 = \int_{\Omega}\int_{\Omega}\abs{k(x,y)}^2 \diff x \diff y = \sum_{i,j=1}^{\infty}\abs{k_{ij}}^2.
+    \end{equation}
+    Set
+    \begin{equation*}
+        k_n(x,y)=\sum_{i,j=1}^{n}k_{ij}\phi_i(x)\phi_j(y),
+    \end{equation*}
+    and
+    \begin{equation*}
+        [K_n u](x)=\int_{\Omega}k_n(x,y)u(y)dy.
+    \end{equation*}
+    Let $u=\sum_{l=1}^{\infty}c_l\phi_l$, then
+    \begin{align*}
+        \begin{autobreak}
+            K_nu=\int_{\Omega}(\sum_{i,j=1}^{n}k_{ij}\phi_i(x)\phi_j(y))(\sum_{l=1}^{\infty}c_l\phi_l(y)) \diff y
+            = \sum_{i,j=1}^n{k_{ij}c_{j}\phi_i(x)\int_{\Omega}\abs{\phi_j(y)}^2 \diff y}
+            = \sum_{i,j=1}^n k_{ij}c_{j}\phi_i,
+        \end{autobreak}
+    \end{align*}
+    so $K_n$ has rank $n$, then $K_n$ is compact by lemma \ref{bounded_op_with_finite-dim_range_is_compact}.\\
+    By Lemma \ref{boundness_of_integral_operator},
+    \begin{align*}
+        \norm{K-K_n}^2 \leq (\int_{\Omega}\int_{\Omega}\abs(k(x,y)-k_n(x,y))^2 \diff x \diff y)(\int_{\Omega}\abs(u(y))^2) = \sum_{i,j=n+1}^{\infty}\abs{k_{ij}}^2,
+    \end{align*}
+    since $\norm{k}_{L^2(\Omega \times \Omega)}^2 = \sum_{i,j=1}^{\infty}\abs{k_{ij}}^2$, $K_n \to K$, so $K$ is compact by Theorem \ref{completeness_of_compact_linear_operator_s1}.
+\end{proof}
 \end{document}
