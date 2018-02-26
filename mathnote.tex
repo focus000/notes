@@ -337,7 +337,7 @@ The space of all compact linear opeartors from norm space $X$ into Banach space 
     Let $u=\sum_{l=1}^{\infty}c_l\phi_l$, then
     \begin{align*}
         \begin{autobreak}
-            K_nu=\int_{\Omega}(\sum_{i,j=1}^{n}k_{ij}\phi_i(x)\phi_j(y))(\sum_{l=1}^{\infty}c_l\phi_l(y)) \diff y
+            K_nu=\int_{\Omega}\left(\sum_{i,j=1}^{n}k_{ij}\phi_i(x)\phi_j(y)\right)\left(\sum_{l=1}^{\infty}c_l\phi_l(y)\right) \diff y
             = \sum_{i,j=1}^n{k_{ij}c_{j}\phi_i(x)\int_{\Omega}\abs{\phi_j(y)}^2 \diff y}
             = \sum_{i,j=1}^n k_{ij}c_{j}\phi_i,
         \end{autobreak}
@@ -345,8 +345,58 @@ The space of all compact linear opeartors from norm space $X$ into Banach space 
     so $K_n$ has rank $n$, then $K_n$ is compact by lemma \ref{bounded_op_with_finite-dim_range_is_compact}.\\
     By Lemma \ref{boundness_of_integral_operator},
     \begin{align*}
-        \norm{K-K_n}^2 \leq (\int_{\Omega}\int_{\Omega}\abs(k(x,y)-k_n(x,y))^2 \diff x \diff y)(\int_{\Omega}\abs(u(y))^2) = \sum_{i,j=n+1}^{\infty}\abs{k_{ij}}^2,
+        \norm{K-K_n}^2 \leq \left(\int_{\Omega}\int_{\Omega}\abs(k(x,y)-k_n(x,y))^2 \diff x \diff y\right)\left(\int_{\Omega}\abs{u(y)}^2\right) = \sum_{i,j=n+1}^{\infty}\abs{k_{ij}}^2,
     \end{align*}
     since $\norm{k}_{L^2(\Omega \times \Omega)}^2 = \sum_{i,j=1}^{\infty}\abs{k_{ij}}^2$, $K_n \to K$, so $K$ is compact by Theorem \ref{completeness_of_compact_linear_operator_s1}.
+\end{proof}
+\subsection{Compact Symmetric Operators on Hilbert Spaces}
+\begin{defi}
+    A linear opeartor $A \in \L(H,H)$ is symmetric if
+    \[
+        (u,Av)=(Au,v), \quad \forall u,v \in H.
+    \]
+\end{defi}
+\begin{prop}
+    if $A$ a symmetric opeartor, then
+    \begin{equation}\label{eq:symmetric_op_norm_inner_pro_to_norm}
+        \norm{A}_{\L(H,H)}=\sup_{\norm{u}=1}\abs{(Au,u)}.
+    \end{equation}
+\end{prop}
+\begin{proof}
+    Let $\alpha = \sup_{\norm{u}=1}\abs{(Au,u)}$, then
+    \begin{equation}
+        \abs{(Au,u)}=\norm{u}^2\abs{(\frac{Au}{\norm{u}},\frac{u}{\norm{u}})} \leq \alpha \norm{u}^2 \quad \forall u \in H.
+    \end{equation}
+    $\forall u,v \in H$, use \ref{eq:symmetric_op_norm_inner_pro_to_norm} and the parallelogram law,
+    \begin{align*}
+        4(Au,v)=(A(u+v),u+v)-(A(u-v),u-v)
+        \leq \alpha(\norm{u+v}^2+\norm{u-v}^2)
+        =2\alpha(\norm{u}^2+\norm{v}^2),
+    \end{align*}
+    if $Au \neq 0$, choose
+    \[ v=\norm{u}\frac{Au}{\norm{Au}}, \]
+    since $\norm{v}=\norm{u}$,
+    \[ \norm{u}\norm{Au} \leq \alpha \norm{u}^2. \]
+    Therefore
+    \[ \norm{Au} \leq \alpha \norm{u}, \]
+    which holds as well if $Au=0$, so
+    \[\norm{A}_{\L(H,H)} \leq \alpha.\]
+    The other hand, use C-S inequality, for $\norm{u}=1$,
+    \[\abs{(Au,u)} \leq \norm{Au}\norm{u} \leq \norm{A}_{op}. \]
+    \begin{lemma}
+        If $k(x,y)=k(y,x)$ then the integral opeartor is symmetric.
+    \end{lemma}
+    \begin{proof}
+        \begin{align*}
+            \begin{autobreak}
+                (Ku,v) = \int_{\Omega}[Ku](x)v(x) \diff x
+                = \int_{\Omega}\left(\int_{\Omega} k(x,y)u(y) \diff y \right)v(x) \diff x
+                = \int_{\Omega}\int_{\Omega} k(x,y)u(y)v(x) \diff x \diff y
+                = \int_{\Omega}\int_{\Omega} k(y,x)u(y)v(x) \diff x \diff y
+                = \int_{\Omega}\left(\int_{\Omega} k(y,x)v(x) \diff x\right)u(y) \diff y
+                = \int_{\omega} u(y)[Kv](y) \diff y = (u, Kv).
+            \end{autobreak}
+        \end{align*}
+    \end{proof}
 \end{proof}
 \end{document}
