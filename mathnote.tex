@@ -34,6 +34,8 @@
 \newcommand\xiff\xLongleftrightarrow
 \newcommand\ximpliedby\xLongleftarrow
 \newcommand\ximplies\xLongrightarrow
+\newcommand\xeq\xlongequal
+\newcommand\nto\nrightarrow
 
 % declare \norm macro
 \DeclarePairedDelimiter{\norm}\lVert\rVert
@@ -45,6 +47,8 @@
 \def\R{\mathbb{R}}
 \DeclareMathOperator{\Ima}{Im}
 \DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\spann}{span}
+\newcommand\spanset[1]{\ensuremath\spann\{#1\}}
 % \DeclareMathOperator{\dim}{dim}
 % domain range
 \DeclareMathOperator{\domain}{D}
@@ -56,7 +60,7 @@
 \chapter{ODEs}
 \chapter{Linear Operators}
 \begin{myDef}[Linear]
-    An operator $A$ on a vector space is \emph{linear} if
+    An operator $A$ on a vector space $V$ is \emph{linear} if
     \[
         A(x+\lambda y)=Ax+\lambda Ay, \forall x, y \in V \text{ and } \lambda \in \R.
     \]
@@ -76,12 +80,12 @@
 \begin{proof}
     \begin{align*}
         \eqref{eq:linear opeartor bounded} \iff \frac{\norm{Ax}_Y}{\norm{x}_X} \leq M, x \neq 0 \\
-        \implies \inf{M} = \exists \sup_{x \neq 0}\frac{\norm{Ax}_Y}{\norm{x}_X}                     \\
+        \implies \inf{M} = \sup_{x \neq 0}\frac{\norm{Ax}_Y}{\norm{x}_X}                \\
         = \sup_{x \neq 0}\norm{A\frac{x}{\norm{x}_X}}_Y = \sup_{\norm{x}_X=1}\norm{Ax}_Y
     \end{align*}
 \end{proof}
 \begin{prop}\label{completeness_of_linear_operator}
-    $Y \in$ Banach space $\implies \L(X,Y) \in$ Banach space.
+    $Y \in$ Banach space, and $X \in$ norm space $\implies \L(X,Y) \in$ Banach space.
 \end{prop}
 \begin{proof}
     Let $\set{A_n}$ be Cauchy $\subset \L(X,Y). \implies$
@@ -131,10 +135,10 @@
 \begin{proof}
     Use C-S inequality
     \begin{align*}
-        \abs{Ku}^2 &= \int_{\Omega}(\int_{\Omega}k(x,y)u(y) \diff y)^2 \diff x \\
-        &\leq \int_{\Omega}(\int_{\Omega}\abs{k(x,y)}^2 \diff y)(\int_{\Omega}\abs{u(y)}^2 \diff y)\diff x \\
-        &= (\int_{\Omega}\int_{\Omega}\abs{k(x,y)}^2 \diff x \diff y)(\int_{\Omega}\abs{u(y)}^2 \diff y) \\
-        &= C^2 \abs{u}^2
+        \abs{Ku}^2 & = \int_{\Omega}(\int_{\Omega}k(x,y)u(y) \diff y)^2 \diff x                                        \\
+                   & \leq \int_{\Omega}(\int_{\Omega}\abs{k(x,y)}^2 \diff y)(\int_{\Omega}\abs{u(y)}^2 \diff y)\diff x \\
+                   & = (\int_{\Omega}\int_{\Omega}\abs{k(x,y)}^2 \diff x \diff y)(\int_{\Omega}\abs{u(y)}^2 \diff y)   \\
+                   & = C^2 \abs{u}^2
     \end{align*}
 \end{proof}
 \section{Domain, Range, Kernel, and the Inverse Operator}
@@ -148,24 +152,24 @@
     \begin{gather*}
         AA^{-1}u=u, \forall u \in \range(A) \text{ and } A^{-1}Au=u, \forall u \in \domain(A).
     \end{gather*}
-    If $A$ is linear and $A^{-1}$ exist then it is linear too.    
+    If $A$ is linear and $A^{-1}$ exist then it is linear too.
 \end{myDef}
 \begin{proof}
     $\forall x,y \in \range(A), \exists x', y' \in \domain(A)$ s.t.$Ax'=x, Ay'=y$.
     \begin{align*}
-        A^{-1}(x+\lambda y)&=A^{-1}(Ax'+\lambda Ay')=A^{-1}A(x'+\lambda y') \\
-        &=x'+\lambda y'=A^{-1}x+\lambda A^{-1}y.
+        A^{-1}(x+\lambda y) & =A^{-1}(Ax'+\lambda Ay')=A^{-1}A(x'+\lambda y') \\
+                            & =x'+\lambda y'=A^{-1}x+\lambda A^{-1}y.
     \end{align*}
 \end{proof}
-\begin{lemma}
+\begin{lemma}\label{A_invertible_iff_kerA=0}
     $A$ is invertible iff $\Ker (A) = \set{0}$.
 \end{lemma}
 \begin{proof}
     ($\implies$), $Ax=y$ has unique solution $\forall y \in \range(A)$.
     If $\exists 0 \neq z \in \Ker(A)$, then $A(x+z)=y$ also, so $\Ker(A)$ must be $\set{0}$.\\
-    ($\impliedby$), if $A$ is not invertible 
+    ($\impliedby$), if $A$ is not invertible
     $\implies \exists y \in \range(A), x_1 \neq x_2 \in \domain(A)$ s.t.
-    $Ax_1=y, Ax_2=y. \implies A(x_1-x_2)=0 \implies 0 \neq x_1-x_2 \in \Ker(A)$. 
+    $Ax_1=y, Ax_2=y. \implies A(x_1-x_2)=0 \implies 0 \neq x_1-x_2 \in \Ker(A)$.
 \end{proof}
 \section{The Baire Category Theorem}
 \begin{thm}[Baire Category Theorem]
@@ -244,7 +248,7 @@
     \begin{equation*}
         \norm{Tx}_Y=\norm{T(x+y)+T(-y)} \leq n +\norm{Ty}_Y \leq 2n,
     \end{equation*}
-    since $\sup_{T \in S}\norm{Ty}_Y < \infty, \forall x  \colon \norm{x}_X=r \implies$
+    since $\sup_{T \in S}\norm{Ty}_Y < \infty. \forall x  \colon \norm{x}_X=r \implies$
     \begin{equation*}
         \norm{Tx}_Y \leq \frac{2n}{r}\norm{x}_X, \text{ for all }T \in S,
     \end{equation*}
@@ -303,7 +307,7 @@ The space of all compact linear opeartors from norm space $X$ into Banach space 
 \begin{proof}
     Let $(\set{u_n} \subset D(A)) < \infty \ximplies{A < \infty} (\set{Au_n} \subset R(A)) < \infty \\ \ximplies[\text{finite-dimensional}]{R(A) \text{ is}} Au_{n_i}$ converge, and so $A$ is compact.
 \end{proof}
-\begin{prop}
+\begin{prop}\label{K_compact}
     The integral opeartor $K \colon L^2(\Omega) \to L^2(\Omega)$ given by
     \begin{equation*}
         [Ku](x)=\int_{\Omega}k(x,y)u(y)dy,
@@ -349,7 +353,7 @@ The space of all compact linear opeartors from norm space $X$ into Banach space 
     \end{align*}
     since $\norm{k}_{L^2(\Omega \times \Omega)}^2 = \sum_{i,j=1}^{\infty}\abs{k_{ij}}^2$, $K_n \to K$, so $K$ is compact by Theorem \ref{completeness_of_compact_linear_operator_s1}.
 \end{proof}
-\subsection{Compact Symmetric Operators on Hilbert Spaces}
+\section{Compact Symmetric Operators on Hilbert Spaces}
 \begin{defi}
     A linear opeartor $A \in \L(H,H)$ is symmetric if
     \[
@@ -383,20 +387,240 @@ The space of all compact linear opeartors from norm space $X$ into Banach space 
     \[\norm{A}_{\L(H,H)} \leq \alpha.\]
     The other hand, use C-S inequality, for $\norm{u}=1$,
     \[\abs{(Au,u)} \leq \norm{Au}\norm{u} \leq \norm{A}_{op}. \]
-    \begin{lemma}
-        If $k(x,y)=k(y,x)$ then the integral opeartor is symmetric.
-    \end{lemma}
-    \begin{proof}
-        \begin{align*}
-            \begin{autobreak}
-                (Ku,v) = \int_{\Omega}[Ku](x)v(x) \diff x
-                = \int_{\Omega}\left(\int_{\Omega} k(x,y)u(y) \diff y \right)v(x) \diff x
-                = \int_{\Omega}\int_{\Omega} k(x,y)u(y)v(x) \diff x \diff y
-                = \int_{\Omega}\int_{\Omega} k(y,x)u(y)v(x) \diff x \diff y
-                = \int_{\Omega}\left(\int_{\Omega} k(y,x)v(x) \diff x\right)u(y) \diff y
-                = \int_{\omega} u(y)[Kv](y) \diff y = (u, Kv).
-            \end{autobreak}
-        \end{align*}
-    \end{proof}
 \end{proof}
+\begin{lemma}\label{K_symmetric}
+    If $k(x,y)=k(y,x)$ then the integral opeartor is symmetric.
+\end{lemma}
+\begin{proof}
+    \begin{align*}
+        \begin{autobreak}
+            (Ku,v) = \int_{\Omega}[Ku](x)v(x) \diff x
+            = \int_{\Omega}\left(\int_{\Omega} k(x,y)u(y) \diff y \right)v(x) \diff x
+            = \int_{\Omega}\int_{\Omega} k(x,y)u(y)v(x) \diff x \diff y
+            = \int_{\Omega}\int_{\Omega} k(y,x)u(y)v(x) \diff x \diff y
+            = \int_{\Omega}\left(\int_{\Omega} k(y,x)v(x) \diff x\right)u(y) \diff y
+            = \int_{\Omega} u(y)[Kv](y) \diff y = (u, Kv).
+        \end{autobreak}
+    \end{align*}
+\end{proof}
+\section{Obtaining an Eigenbasis from a Compact Symmetric Operator}
+\begin{lemma}\label{hilbert-schmidt_thms_lemma}
+    If $A$ is a compact symmetric opeartor then at least one of $\pm \norm{A}_{op}$ is an eigenvalue of $A$.
+\end{lemma}
+\begin{proof}
+    Assume $A \neq 0$, otherwise the result is trivial. Since $A$ is symmetric,
+    \[\norm{A}_{op}=\sup_{\norm{x}=1}\abs{(Ax,x)}.\]
+    Thus $\exists \abs{x_n}=1$ s.t.
+    \[(Ax_n,x_n) \to \pm \norm{A}_{op} = \alpha.\]
+    Since $A$ is compact, $\exists Ax_{n_j} \to y$, Relabel $x_{n_j}$ as $x_n$ again. Consider
+    \[\norm{Ax_n-\alpha x_n}^2 = \norm{Ax_n}^2 + \alpha^2 -2\alpha(Ax_n,x_n) \to 0 \text{ as } n \to \infty;\]
+    $\implies$
+    \[\alpha x_n \to y \text{ as } Ax_n \to y,\]
+    and since fixed $\alpha \neq 0$, we must have $x_n \to x \in H$. $\implies$
+    \[Ax=\alpha x\]
+    since $\norm{x}-\norm{x_n} \leq \norm{x-x_n} \to 0$, $x \neq 0$.
+\end{proof}
+\begin{thm}[Hilbert-Schmidt Theorem]\label{hilbert_schmidt_thm}
+    Let $A$ be a linear, symmetric, compact operator acting on a infinite-dimensional Hilbert space $H$. Then all eigenvalues $\lambda_j \in \R$ of $A$, and if they are ordered so that
+    \[\abs{\lambda_{n+1}} \leq \abs{\lambda_{n}},\]
+    one has
+    \[\lim_{n \to \infty}\lambda_n = 0.\]
+    Furthermore, the eigenvalues $w_j$ can be chosen so that they form an orthonormal basis for $R(A)$, and the action of $A$ on any $u \in H$ is given by
+    \[Au = \sum_{j=1}^{\infty} \lambda_j (u,w_j)w_j.\]
+\end{thm}
+\begin{proof}
+    By lemma \ref{hilbert-schmidt_thms_lemma}, $\exists w_1$ s.t. $\norm{w_1}=1$ and $Aw_1 = (\lambda_1 = \pm \norm{A}) w_1$. Consider
+    \[H_1 = w_1^{\bot}, \quad \left. A_1 = A \right|_{H_1}.\]
+    Clearly, $A_1$ is a symmetric compact opeartor. Since if $u \perp w_1$ then
+    \[(Au, w_1)=(u,Aw_1)=\lambda_1(u,w_1)=0.\]
+    We know that $A_1 \colon H_1 \to H_1$.
+    So we have $(A_1 \text{ or } A) w_2=(\lambda_2 = \pm \norm{A_1})w_2$ and $\norm{w_2} = 1$, and $\abs{\lambda_1} \geq \abs{\lambda_2}$ since $H_1 \subset H$.\\
+    Continuing inductively in this way, we obtain $\set{w_j}$, with $Aw_j=\lambda_j w_j$ and $\abs{\lambda_{n+1}} \leq \abs{\lambda_{n}}$.\\
+    Assume $\lambda_j \nto 0$, so that $\abs{\lambda_j} \geq \eta$ for some $\eta > 0$, thus $\forall j, \quad \eta w_j \in A(B(0, 1))$, but ${\eta w_j}$ has no convergent subsequence, contradicting the compactness of $A$.
+
+    If $x \perp w_j$ for all $j$, then 
+    \[\norm{Ax} \leq \abs{\lambda_j}\norm{x}, \quad \forall j\]
+    we must have $Ax=0$, hence $x \in \Ker A$.
+
+    If $\set{k_j}_{j \in \mathcal{I}}$ is an orthonormal basis for $\Ker A$, then $\set{k_j} \cup \set{w_j}$ is an orthonormal basis for $H$. So
+    \[u = \sum_{j=1}^{\infty}(u,w_j)w_j + \sum_{j \in \mathcal{I}}(u, k_j)k_j\], 
+    we obtain
+    \[Au = \sum_{j=1}^{\infty}\lambda_j(u,w_j)w_j\].
+\end{proof}
+\begin{coro}\label{invertible_to_basis}
+    If $A$ is invertible and satisfies the conditions of thm \ref{hilbert_schmidt_thm}, then there is a basis of $H$ consisting entirely of eigenfunctions of $A$.
+\end{coro}
+\begin{proof}
+    $A$ is invertible $\xiff{\text{lemma \ref{A_invertible_iff_kerA=0}}} \Ker{A} =\set{0} \ximplies{\text{thm \ref{hilbert_schmidt_thm}}} u = \sum_{j=1}^{\infty}(u,w_j)w_j$
+\end{proof}
+Now we consider Sturm-Liouville boundary value problem. $L$ is the linear differential operator:
+\begin{equation}
+    L[u]=-\frac{\diff}{\diff x}\left(p(x)\frac{\diff u}{\diff x}\right) + q(x)u(x), 
+\end{equation}
+where $p,q \in C[a,b], \quad p,q > 0$, the Sturm-Liouville eigenvalue problem is to find all those $\lambda$ in
+\begin{equation}\label{eq:sturm_liouville_eigenfunction}
+    L[u] = \lambda w(x)u(x)
+\end{equation}
+has a corresponding solution $u(x)$, where "weight function" $w \in C[a,b], \quad w > 0$. For simplicity we study \ref{eq:sturm_liouville_eigenfunction} with the boundary conditions
+\[u(a)=u(b)=0\].
+\begin{thm}
+    The eigenfunctions of problem \ref{eq:sturm_liouville_eigenfunction} form a complete orthonormal basis for $L_w^2(a,b)$:
+    \begin{equation}\label{eq:Lw2_def}
+        L_w^2(a,b)=\left\{u \colon \int_a^b w(x)\abs{u(x)}^2 \diff x < \infty \right\}.
+    \end{equation}
+    Inner product corresponds to the norm in definition \ref{eq:Lw2_def}:
+    \[(u,v)_w = \int_a^b w(x)u(x)v(x) \diff x.\]
+\end{thm}
+ \begin{proof}
+     First show that any $\lambda > 0$ in \ref{eq:sturm_liouville_eigenfunction}
+     \begin{align*}
+         \begin{autobreak}
+             (Lu,u)=\int_a^b -(pu')'u + q\abs{u}^2 \diff x
+             = \int_a^b -(p'u'u+pu''u)+q\abs{u}^2 \diff x
+             = \int_a^b -(p'u'u+pu''u+pu'u')+p\abs{u'}^2 +q\abs{u}^2 \diff x
+             = \int_a^b p\abs{u'}^2 +q\abs{u}^2 \diff x - \left[ pu'u \right]_a^b
+             \xeq{u(a)=u(b)=0} \int_a^b p\abs{u'}^2 +q\abs{u}^2 \diff x
+             \geq \int_a^b q\abs{u}^2 \diff x
+             \geq \frac{\inf_{x \in [a,b]q(x)}}{\sup_{x \in [a,b]}w(x)}\int_a^b w(x)\abs{u(x)}^2 \diff x
+             = \alpha (wu,u),
+         \end{autobreak}
+     \end{align*}
+     with $\alpha > 0$, and so $\lambda \geq \alpha > 0.$
+
+     The Green's function $G(x,y)$, the solution of
+     \[L[G]=\delta(x-y), \quad G(x,a)=G(x,b)=0,\]
+     is symmetric in $x$ and $y$ (see TODO: ex 3.7). Let
+     \[L[u]=f(x), \quad u(a)=u(b)=0\]
+     then
+     \[u(x)=\int_a^b G(x,y)f(y) \diff y,\]
+     since
+     \[L[u]=L[\int_a^b G(x,y)f(y) \diff y]=\int_a^b L[G]f(y) \diff y = \int_a^b \delta(x-y)f(y) \diff y = f(x).\]
+     The original Sturm-Liouville problem \eqref{eq:sturm_liouville_eigenfunction} $\iff$
+     \begin{equation}\label{eq:sturm_liouville_eigenfunction_eq_form}
+         \int_a^b G(x,y)w(y)u(y) \diff y = \frac{1}{\lambda} u(x).
+     \end{equation}
+     Set
+     \[v(x)=\sqrt{w(x)}u(x), \quad k(x,y)=G(x,y)\sqrt{w(x)w(y)},\]
+     then \eqref{eq:sturm_liouville_eigenfunction_eq_form} $\iff$
+     \begin{equation}
+         Kv = \frac{1}{\lambda}v,
+     \end{equation}
+     where $K$ is the integral opeartor given by
+     \[Kv(x)=\int_a^b k(x,y)v(y) \diff y.\]
+     $k(x,y)$ is symmetric and bounded $\ximplies[\text{prop \ref{K_compact}}]{\text{lemma \ref{K_symmetric}}}$ $K$ is compact and symmetric $\ximplies{\text{thm \ref{hilbert_schmidt_thm}}}$ $K$ has a set of orthonormal eigenfunctions $\set{\phi_j}.$
+
+     Since $\lambda, w(x) > 0$, $\Ker L = \set{0}$ by \eqref{eq:sturm_liouville_eigenfunction} $\implies$ $\Ker K = \set{0}$ $\ximplies{\text{coro \ref{invertible_to_basis}}}$ the eigenfunctions $\set{\phi_j}$ form a basis for $L^2(a,b)$.
+
+     Since $v(x)=\sqrt{w(x)}u(x)$, we have an eigenfunction $\varphi_j=\phi_j w^{-1/2}$ of the original Sturm-Liouville problem \eqref{eq:sturm_liouville_eigenfunction}, and
+     \[(\varphi_j,\varphi_k)=\int_a^b w(x)\varphi_j(x)\varphi_k(x) \diff x = (\phi_j, \phi_k) = \delta_{jk}.\]
+     Now for any $f \in L_w^2(a,b) \implies w^{1/2}f \in L^2(a,b) \implies$
+     \[w^{1/2}f = \sum_{j=1}^{\infty} (w^{1/2}f,\phi_j)\phi_j.\]
+     $\implies$
+     \[f=\sum_{j=1}^{\infty}(w^{1/2}f, w^{1/2}\varphi_j)\varphi_j = \sum_{j=1}^{\infty}(f,\varphi_j)_w\varphi_j.\]
+ \end{proof}
+ \chapter{Dual Spaces}
+ We study dual space is to circumventing the lack of compactness of bounded sets in infinite-dimensional Spaces.
+ \begin{myDef}[linear functional]
+     $\forall f \in \L(X, \R)$, where $X$ is a Banach space, called a linear functional on $X$
+ \end{myDef}
+ Because of its importance, we adopt a special notation for $\L(X, \R)$.
+ \begin{defi}[dual space]
+     $X$ a real (vector space $X$ over the field $\R$) Banach space,
+     \[X^* := \L(X,\R)\]
+     called the dual space of $X$.
+ \end{defi}
+ By Proposition \ref{completeness_of_linear_operator}, $(X^*, \norm{\cdot}_{op})$ is a Banach space, we will denote:
+ \[\norm{f}_* = \norm{f}_{X^*} := \norm{f}_{\L(X,\R)}.\]
+ \section{The Hahn-Banach Theorem}
+ TODO: descrable hahn-banach thm.
+ \begin{myDef}[partial order, chain, upper bound, maximal element]
+     A partial order on a set $P$ is an opeartion $\leq$ that satisfies
+     \begin{enumerate}
+         \item (reflexive) $a \leq a$, $\forall a \in P$;
+         \item (antisymmetric) if $a \leq b$ and $b \leq a$, then $a = b$;
+         \item (transitive) if $a \leq b$ and $b \leq c$, then $a \leq c$.
+     \end{enumerate}
+     
+     A subset $C \subset P$ is called a chain if $\forall a, b \in C$ either $a \leq b$ or $b \leq a$ (or both if $a = b$).
+
+     An element $b$ is an upper bound for $S \subset P$ if $s \leq b$, $\forall s \in S.$
+
+     $m$ is a maximal element of $P$ if $m \leq a \implies a = m.$
+ \end{myDef}
+ \begin{lemma}[Zorn's lemma]
+     if $P$ is a partial order set and all chains in $P$ have an upper bound then $P$ has a maximal element.
+ \end{lemma}
+ TODO:an application of zorn's lemma ex 4.1
+ \begin{thm}
+     $X$ be a Banach space and $M$ a linear subspace of $X$. $f \in M^*$ s.t.
+     \begin{equation}
+         \abs{f(x)} \leq k\norm{x}, \quad \forall x \in M.
+     \end{equation}
+     Then $\exists$ an extension $F \in X^*$ of $f$, s.t.
+     \begin{equation}
+         \abs{F(x)} \leq k\norm{x}, \quad \forall x \in X.
+     \end{equation}
+ \end{thm}
+ \begin{proof}
+    We use Zorn's lemma to prove the existence of $F$. Consider
+    \begin{equation}
+        E = \{(g,G) \colon g \in G^* \text{ extends of } f, \abs{g(x)} \leq k\norm{x}, \forall x \in G\}
+    \end{equation}
+    Since $(f,E) \in E$, $E \neq \emptyset$.
+    def an order on $E$: $(g,G) \geq (h,H)$ if $g$ extends $h$.
+    For any chain $C=\set{(g_i, G_i)}$, set
+    \[u(x) = g_i(x), \quad x \in G_i\]
+    on
+    \[U=\cup_i G_i,\]
+    then $u$ is an upper bound for $C$.
+    By Zorn's lemma, there exist a maximal element $(F,W)$ of $E$.
+
+    Now we need proof $W = X$. If $W \neq X$, then $\exists z \in X-W$, $\forall x \in Z = \spanset{z, W}$, can be uniquely written as
+    \[x = w +\alpha z,\]
+    since
+    \[w_1 + \alpha_1 z = w_2 +\alpha_2 z \implies (\alpha_1 - \alpha_2)z=w_1-w_2;\]
+    since $z \notin W, w_1-w_2 \in w \implies \alpha_1 = \alpha_2$ and $w_1=w_2$. def $g \in Z^*$
+    \[g(w+\alpha Z)=F(w)+\alpha c.\]
+    we need let $g$ be extends of $f$ on $Z$, that is
+    \begin{equation}
+        \abs{F(w)+\alpha c} \leq k\norm{w+\alpha z}, \quad \forall w \in W, \alpha \in \R
+    \end{equation}
+    $\iff$
+    \begin{equation}
+        F(w)+\alpha c \leq k\norm{w+\alpha z}
+    \end{equation}
+    (
+        $\iff$
+        \begin{equation*}
+            F(-w)+(-\alpha) c \leq k\norm{-w+(-\alpha) z}
+        \end{equation*}
+    )
+    $\iff$
+    \begin{gather*}
+        c \leq \frac{1}{\alpha}(k\norm{w+\alpha z} - F(w)),\\
+        -c \leq \frac{1}{\alpha}(k\norm{w-\alpha z} - F(w)),
+    \end{gather*}
+    with $w \in W$ and $\alpha \geq 0$, $\iff$
+    \begin{equation}
+        \frac{1}{\alpha_1}(F(w_1) - k\norm{w_1-\alpha_1 z}) \leq c \leq \frac{1}{\alpha_2}(k\norm{w_2+\alpha_2 z} - F(w_2)).
+    \end{equation}
+    The existence of $c$ equals
+    \begin{equation*}
+        \sup \frac{1}{\alpha_1}(F(w_1) - k\norm{w_1-\alpha_1 z}) \leq \inf \frac{1}{\alpha_2}(k\norm{w_2+\alpha_2 z} - F(w_2)).
+    \end{equation*}
+    $\implies$
+    \begin{equation*}
+        \alpha_2(F(w_1) - k\norm{w_1-\alpha_1 z}) \leq \alpha_1(k\norm{w_2+\alpha_2 z} - F(w_2))
+    \end{equation*}
+    $\implies$
+    \begin{equation}
+        F(\alpha_2 w_1 + \alpha_1 w_2) \leq k\norm{\alpha_1 w_2 +\alpha_1 \alpha_2 z} +k\norm{\alpha_2 w_1 +\alpha_1 \alpha_2 z}.
+    \end{equation}
+    Since
+    \begin{equation*}
+        \abs{F(\alpha_2 w_1 + \alpha_1 w_2)} \leq k\norm{\alpha_2 w_1 + \alpha_1 w_2} \leq k\norm{\alpha_1 w_2 +\alpha_1 \alpha_2 z} +k\norm{\alpha_2 w_1 +\alpha_1 \alpha_2 z}.
+    \end{equation*}
+    So we can find constant $c$.
+\end{proof}
+TODO:lemma 4.4 coro 4.5
 \end{document}
