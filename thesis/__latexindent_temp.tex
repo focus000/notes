@@ -1,0 +1,662 @@
+\documentclass[11pt]{amsart}
+
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{cleveref}
+% \usepackage{hyperref}
+% \bibliographystyle{plain}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{proofpart}{part}
+\makeatletter
+\@addtoreset{proofpart}{theorem}
+\makeatother
+
+\numberwithin{equation}{section}
+
+% \providecommand*{\lemmaautorefname}{Lemma}
+% \providecommand*{\corollaryautorefname}{Corollary}
+% \providecommand*{\propositionautorefname}{Proposition}
+% \providecommand*{\remarkautorefname}{Remark}
+% \providecommand*{\definitionautorefname}{Definition}
+
+\newcommand*\abs[1]{\lvert#1\rvert}
+\newcommand*\norm[1]{\lVert#1\rVert}
+\newcommand*\Brace[1]{\lbrace#1\rbrace}
+% \newcommand*\innerproduct[1]{\langle#1\rangle}
+
+\newcommand\R{\mathbb{R}}
+
+\DeclareMathOperator{\Div}{div}
+
+\title[Attractor of $p$-laplace equation]{Global attractors of weighted $p$-laplace equation with damping term}
+
+\author[Y. Li]{Yunfang Li}
+\address[Y. Li]{School of Mathematics and Statistics, Lanzhou University, Lanzhou, 730000, China}
+\email{{\tt liyf17@lzu.edu.cn}}
+
+\keywords{Global attractor, global solution, weighted $p$-laplacian}
+\subjclass[2010]{74H40, 35B41, 35K65}
+
+\begin{document}
+
+\begin{abstract}
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+This paper is concerned with nonlinear parabolic equation of the form
+\begin{equation}\label{eq:main}
+\begin{alignedat}{2}
+& u_t = \Div(a(x)\abs{\nabla u}^{p-2}\nabla u) - b(x)\abs{\nabla u}^2 \quad &\text{in } \Omega \times \R^+,\\
+& u(x,0) = u_0 \quad &\text{in } \Omega,\\
+& u = 0 \quad &\text{on } \partial\Omega,
+\end{alignedat}
+\end{equation}
+where $\Omega$ is a bounded open domain in $\R^{n}$ with a sufficiently smooth boundary $\partial\Omega$, $p>1$.
+$ a(x)$, $b(x) \in C^1(\bar{\Omega}) $, $b(x) \geq 0$, and $a(x) > 0$ in $\Omega$, $a(x) = 0$ on $\partial\Omega$.
+
+To study global attractors, we need define a semigroup in some suitable space.
+In~\cite{Zhan2019Uniquenessa},the author has proved the existence and uniqueness of the weak
+solution to \cref{eq:main} with positive initial data in
+$L^{\infty}(\Omega) \cap W_0^{1,p}(a,\Omega) $.
+\begin{theorem}
+	If $p>4$, $a(x)$, $b(x)$ satisfies
+	\begin{equation}
+		\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c,
+	\end{equation}
+	and $u_0$ satisfies
+	\begin{equation}
+		u_0 \in L^{\infty}(\Omega), a(x)u_0 \in W_0^{1,p}(\Omega),
+	\end{equation}
+	then \cref{eq:main} has unique nonnegative weak solution satisfies
+	\begin{equation}
+		u \in L^{\infty}(Q_T), a(x)\abs{\nabla u}^p \in L^1(Q_T).
+	\end{equation}
+	The initial value is satisfied in the sense of that
+	\begin{equation}
+		\lim_{t \to 0}\int_{\Omega}\abs{u(x,t) - u_0(x)}dx = 0.
+	\end{equation}
+\end{theorem}
+We proof the existence and
+uniqueness of the weak solution to \cref{eq:main} with initial data in
+$L^2(\Omega) $ based on the result in~\cite{Zhan2019Uniquenessa}, and we can use
+these solutions to define a semigroup $\Brace{S(t)}_{t \geq 0} $ in $L^2(\Omega) $.
+
+\section{Preliminaries and hypotheses}
+\begin{lemma}\label{lem:VecIneq}
+	Let $a$ and $b$ denoting vectors in $\R^{n}$, if $p \geq 4$, then we have
+	\begin{equation}
+		\abs{a^2 - b^2}^{\frac{p}{2}}
+		\leq C \langle \abs{a}^{p-2}a - \abs{b}^{p-2}b, a-b\rangle
+	\end{equation}
+\end{lemma}
+\begin{proof}
+	when $p \geq 1 $
+	\begin{equation}\label{eq:p_ineq}
+		\abs{a-b}^p \leq C\abs{\abs{a}^{p-1}a - \abs{b}^{p-1}b},
+	\end{equation}
+	to prove this, firstly, for $n = 1$ and $a$, $b \geq 0$, we have
+	\begin{equation}
+		\abs{a-b}^p \leq \abs{a^p - b^p}.
+	\end{equation}
+	Without loss of generality, we assume $a \leq b$, let
+	\begin{equation}
+		f(x) = (b-a+x)^p - x^p,
+	\end{equation}
+	then
+	\begin{equation}
+		f'(x) = p\left((b-a+x)^{p-1} - x^{p-1}\right) \geq 0,
+	\end{equation}
+	hence
+	\begin{equation}
+		\left(b-a\right)^p = f(0) \leq f(a) = b^p - a^p.
+	\end{equation}
+	Applying jensen's inequality, we also have
+	\begin{equation}
+		\left(a+b\right)^p \leq 2^{p-1}\left(a^p + b^p\right),
+	\end{equation}
+	hence we proved \cref{eq:p_ineq} while $n = 1$, for $n > 1$, we need use
+	the law of cosines, assume $\gamma$ is the angle contained between sides
+	of lengths $a$ and $b$, we have
+	\begin{equation}
+		\begin{split}
+			\left(\abs{a-b}^p\right)^2
+			&= \left(a^2 + b^2 - 2 \abs{a}\abs{b}\cos{\gamma}\right)^p\\
+			&\leq \left(a^2+b^2\right)^p - 2^p\abs{a}^p\abs{b}^p\cos^p{\gamma}\\
+			&\leq 2^{p-1}\left(a^{2p} + b^{2p} - 2\abs{a}^p\abs{b}^p\cos^p{\gamma}\right)\\
+			&\leq \left(2^{p-1}+C\right)\left(a^{2p} + b^{2p}\right)
+			- \left(2^{p-1}\cos^p{\gamma}+C\right)2\abs{a}^p\abs{b}^p\\
+			&\leq \left(2^{p-1}+C\right)\left(a^{2p} + b^{2p} - 2\abs{a}^p\abs{b}^p\cos{\gamma}\right)\\
+			&= \left(2^{p-1}+C\right)\abs{\abs{a}^{p-1}a - \abs{b}^{p-1}b}^2,
+		\end{split}
+	\end{equation}
+	when $C$ large enough, indeed
+	\begin{equation}
+		\begin{split}
+			& 2^{p-1}\cos^p{\gamma} + C - \left(2^{p-1}+C\right)\cos{\gamma}\\
+			={} & 2^{p-1}\left(\cos^p{\gamma} - \cos{\gamma}\right) + C\left(1-\cos{\gamma}\right)
+			\geq 0
+		\end{split}
+	\end{equation}
+	when $C$ large enough. Hence we proved \cref{eq:p_ineq}.
+
+	On the other hand, we have
+	\begin{equation}
+		\abs{\abs{b}^{p-1}b - \abs{a}^{p-1}a} \leq p\abs{b-a}\int_0^1 \abs{a + t(b - a)}^{p-1}dt.
+	\end{equation}
+	Note that, if $p \geq 2$, we have
+	\begin{equation}\label{eq:VecIneq_1}
+		\langle \abs{a}^{p-2}a - \abs{b}^{p-2}b, a-b\rangle
+		\geq \abs{a-b}^2\int_0^1 \abs{b + t(a - b)}^{p-2}dt,
+	\end{equation}
+	the proof of~\cref{eq:VecIneq_1} could find in~\cite{Lindqvist????Notes}.
+	Hence when $p \geq 4$ we have
+	\begin{equation}
+		\begin{split}
+			\abs{a^2 - b^2}^{\frac{p}{2}}
+			&\leq 2^{\frac{p}{2}}\abs{a-b}^{\frac{p}{2}}
+			\left(\int_0^1 \abs{b + t(a - b)}dt\right)^{\frac{p}{2}}\\
+			&\leq C\frac{p-2}{2}2^{\frac{p}{2}}\abs{a-b}^2
+			\left(\int_0^1 \abs{b + t(a - b)}^{\frac{p-4}{2}}dt\right)\\
+			&\times\left(\int_0^1 \abs{b + t(a - b)}dt\right)^{\frac{p}{2}}\\
+			&\leq C\frac{p-2}{2}2^{\frac{p}{2}}\abs{a-b}^2
+			\int_0^1 \abs{b + t(a - b)}^{p-2}dt\\
+			&\leq C \langle \abs{a}^{p-2}a - \abs{b}^{p-2}b, a-b\rangle
+		\end{split}
+	\end{equation}
+\end{proof}
+
+\section{Existence and uniqueness of the weak solution}
+\begin{theorem}\label{thm:absorb}
+If~\cref{eq:main} satisfy conditions in~\cite[thm 1.3]{Zhan2019Uniquenessa}, and $u_0 \in L^2(\Omega) $, then it has a weak solution satisfies
+\begin{equation}
+u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+\begin{proofpart}[remove positive initial value from {\cite[thm 1.3]{Zhan2019Uniquenessa}}]
+	let $u_{\epsilon,0} \in C_0^\infty(\Omega) $, $au_{\epsilon,0} \to au_0 $ in
+	$W_0^{1,p}(\Omega) $, by maximum principle we have $\abs{u_{\epsilon}} \leq C$,
+	where $C$ only depends on $\norm{u_0}_{\infty} $.
+	\begin{equation}
+		\begin{split}
+			\abs{\int_0^T\int_{\Omega} b\abs{\nabla u_{\epsilon}}^2u_{\epsilon}}
+			&\leq C\int_0^T\left( \int_{\Omega} b^{\frac{p}{p-2}}a^{-\frac{2}{p-2}}\abs{u_{\epsilon}}^{\frac{p}{p-2}} \right)^{\frac{p-2}{p}}
+			\left(  \int_{\Omega} a\abs{\nabla u_{\epsilon}}^p \right)^{\frac{2}{p}}\\
+			&\leq C\int_0^T\left(\int_{\Omega}\abs{u_{\epsilon}}^2\right)^{\frac{p}{2(p-2)}} + \frac{1}{2}\int_0^T\int_{\Omega} a\abs{\nabla u_{\epsilon}}^p\\
+			&\leq \eta\int_0^T\int_{\Omega}\abs{u_{\epsilon}}^2 + \frac{1}{2}\int_0^T\int_{\Omega} a\abs{\nabla u_{\epsilon}}^p + C(\eta)
+		\end{split}
+	\end{equation}
+	then just as the prove in~\cite[thm 1.3]{Zhan2019Uniquenessa}, we have the weak solution.
+\end{proofpart}
+\begin{proofpart}[$u_0 \in L^2(\Omega)$]
+	Choose $C_c^{\infty}(\Omega) \supset \Brace{u_{n, 0}}_{n=1}^{\infty} $
+	convergence to $u_0$ in $L^2(\Omega) $ as $n \to \infty $. $\forall u_{n, 0}$,
+	by the first part of this proof, there exist a unique $u_n$ as a weak solution satisfy \cref{eq:main}.
+	Hence we have
+	\begin{equation}
+		\begin{split}
+			& \frac{1}{2}\int_{\Omega}\left(u_n-u_m\right)^2(t)\\
+			+{} & \int_{0}^{t}\int_{\Omega}a(x)
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+			\left(\nabla u_n - \nabla u_m\right)\\
+			={} & \int_{0}^{t}\int_{\Omega}b(x)\left(\abs{\nabla u_n}^2
+			- \abs{\nabla u_m}^2\right)\left(u_n - u_m\right)
+			+ \frac{1}{2}\int_{\Omega}\left(u_n-u_m\right)^2(0).
+		\end{split}
+	\end{equation}
+	Use \cref{lem:VecIneq}, we have
+	\begin{equation}
+		\begin{split}
+			& \int_{0}^{t}\int_{\Omega}b\left(\abs{\nabla u_n}^2
+			- \abs{\nabla u_m}^2\right)\left(u_n - u_m\right)\\
+			\leq{} & \left(\int_0^t\int_{\Omega}a\left(\abs{\nabla u_n}^2
+			- \abs{\nabla u_m}^2\right)^{\frac{p}{2}}\right)^{\frac{2}{p}}
+			\left(\int_0^t\int_{\Omega}\left(ba^{-\frac{2}{p}}
+			\left(u_n-u_m\right)\right)^{\frac{p}{p-2}}\right)^{\frac{p-2}{p}}\\
+			\leq{} & C\left(\int_0^t\int_{\Omega}a
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+			\left(\nabla u_n - \nabla u_m\right)\right)^{\frac{2}{p}}\\
+			\times{} & \left(\int_0^t\int_{\Omega}b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}}\right)^{\frac{p-4}{2p}}
+			\left(\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2\right)^{\frac{1}{2}}\\
+			\leq{} & \frac{1}{2}\int_0^t\int_{\Omega}a
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+			\left(\nabla u_n - \nabla u_m\right)\\
+			+{} & C\left(\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2\right)^{\frac{p}{2(p-2)}}.
+		\end{split}
+	\end{equation}
+	Combine above inequalities we get
+	\begin{equation}\label{un-umL2_0TW1p_bd_0TL2_L20}
+		\begin{split}
+			& \int_{\Omega}\left(u_n-u_m\right)^2(t)\\
+			+{} & \int_{0}^{t}\int_{\Omega}a
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+			\left(\nabla u_n - \nabla u_m\right)\\
+			\leq{} & C\left(\int_0^t\int_{\Omega}
+			\left(u_n-u_m\right)^2\right)^{\frac{p}{2(p-2)}}
+			+ \int_{\Omega}\left(u_n-u_m\right)^2(0).
+		\end{split}
+	\end{equation}
+	For $p=4$, we use Gr\"onwall's inequality have
+	\begin{equation}
+		\begin{split}
+			\int_{\Omega}\left( u_n-u_m \right)^2(t)
+			\leq \int_{\Omega}\left(u_n-u_m\right)^2(0)e^{Ct} ,
+		\end{split}
+	\end{equation}
+	for a.e.\ $0 \leq t \leq T$. For $p>4$,
+	we can't use Gr\"onwall's inequality directly,
+	since $\frac{p}{2(p-2)}<1$. But we can use Young's inequality up
+	exponential to $1$,
+	indeed we can deduce \cref{un-umL2_0TW1p_bd_0TL2_L20} as
+	\begin{equation}
+		\begin{split}
+			& \int_{\Omega}\left(u_n-u_m\right)^2(t)\\
+			+{} & \int_{0}^{t}\int_{\Omega}a
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+			\left(\nabla u_n - \nabla u_m\right)\\
+			\leq{} & \epsilon\int_0^t\int_{\Omega}
+			\left(u_n-u_m\right)^2
+			+ \epsilon^{-\frac{p}{p-4}}C
+			+ \int_{\Omega}\left(u_n-u_m\right)^2(0),
+		\end{split}
+	\end{equation}
+	hence we can use Gr\"onwall's inequality to get
+	\begin{equation}\label{un-umL2_gronwall}
+		\begin{split}
+			\int_{\Omega}\left( u_n-u_m \right)^2(t)
+			\leq \left( 
+				\epsilon^{-\frac{p}{p-4}}C
+				+ \int_{\Omega}\left(u_n-u_m\right)^2(0)
+				\right)e^{\epsilon t}
+		\end{split}
+	\end{equation}
+	for a.e.\ $0 \leq t \leq T$. Choose $\epsilon = \delta t^{-1}$,
+	where $\delta > 0$ is arbitrary, for a.e.\ fixed $0 \leq t \leq T$,
+	let $n,m \to \infty$ and $\delta \to 0$, we have
+	\begin{equation}\label{cauchy_in_L2}
+		\norm{u_n(t,\cdot)-u_m(t,\cdot)}_{L^2(\Omega)} \to 0,
+	\end{equation}
+	hence for a.e.\ fixed $0 \leq t \leq T$, there exists
+	$u(t,\cdot) \in L^2(\Omega)$ such that
+	\begin{equation}
+		\norm{u_n(t,\cdot)-u(t,\cdot)}_{L^2(\Omega)} \to 0
+	\end{equation}
+	as $n \to \infty$, applying continuous of $u_n(t, \cdot)$
+	in $L^2(\Omega)$, we have
+	\begin{equation}
+		\lim_{t' \to t}\norm{u(t,\cdot)-u(t',\cdot)}_{L^2(\Omega)}=0.
+	\end{equation}
+	Applying \cref{cauchy_in_L2} in \cref{un-umL2_0TW1p_bd_0TL2_L20},
+	we have
+	\begin{equation}\label{cauchy_in_W1pa}
+		\int_{0}^{t}\int_{\Omega}a
+		\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+		- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+		\left(\nabla u_n - \nabla u_m\right)
+		\to 0,
+	\end{equation}
+	note that
+	\begin{equation}
+		\begin{split}
+			& \int_0^T\int_{\Omega}a\abs{\nabla u_n - \nabla u_m}^p\\
+			\leq{} & 2^{p-2}\int_{0}^{T}\int_{\Omega}a
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+			\left(\nabla u_n - \nabla u_m\right),
+		\end{split}
+	\end{equation}
+	hence there exists $u \in L^p(0, T; W_0^{1,p}(a,\Omega))
+	\cap C([0, T]; L^2(\Omega))$ such that
+	\begin{equation}
+		u_{n} \to u
+	\end{equation}
+	in $L^p(0, T; W_0^{1,p}(a,\Omega))\cap C([0, T]; L^2(\Omega))$
+	as $n \to \infty$.
+
+	Finally, we consider the damping term, applying H\"older's inequality,
+	for any $v \in C_c^\infty$,
+	\begin{equation}
+		\begin{split}
+			& \int_0^T\int_{\Omega}b\left(\abs{\nabla u_n}^2
+			- \abs{\nabla u}^2\right)v\\
+			\leq{} & C_p\left(\int_0^T\int_{\Omega}a
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u}^{p-2}\nabla u\right)
+			\left(\nabla u_n - \nabla u\right)\right)^{\frac{2}{p}}\\
+			\times{} & \left(\int_0^T\int_{\Omega}b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}}\right)^{\frac{p-4}{2p}}
+			\left(\int_0^T\int_{\Omega}v^2\right)^{\frac{1}{2}} \to 0
+		\end{split}
+	\end{equation}
+	as $n \to \infty$,
+\end{proofpart}
+hence we have completed the proof.
+\end{proof}
+\begin{remark}
+	For $p>4$, we also could estimate \cref{un-umL2_0TW1p_bd_0TL2_L20} as
+	\begin{equation}
+		\begin{split}
+			& \int_{\Omega}\left( u_n-u_m \right)(t)\\
+			+{} & \int_{0}^{t}\int_{\Omega}a
+			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
+			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
+			\left(\nabla u_n - \nabla u_m\right)\\
+			\leq{} & C\int_0^t\int_{\Omega}
+			\left( u_n-u_m \right)^{\frac{p}{p-2}}
+			+ \int_{\Omega}\left( u_n-u_m \right)^2(0),
+		\end{split}
+	\end{equation}
+	since $\frac{p}{p-2}>1$, we could use Gr\"onwall's inequality,
+	then applying similar steps we could get \cref{cauchy_in_W1pa}.
+	By weak compactness theorem we could also get the existence of solutions.
+\end{remark}
+Now we can use these solutions to define a semigroup $\Brace{S(t)}_{t>0}$,
+by setting
+\begin{equation}
+	S(t)u_0 = u(t),
+\end{equation}
+which is continuous on $u_{0}$ in $L^2(\Omega)$.
+\section{Existence of the global attractors}
+\begin{theorem}
+	The semigroup $\Brace{S(t)}_{t \geq 0} $ possesses a bounded absorbing set in
+	$L^2$ and $W_0^{1,p}(a,\Omega)$ respectively, i.e.\ for any bounded subset
+	$B \subset L^2(\Omega)$, there exist constants $T(\norm{u_0}_2)$ and $\rho > 0$, such that
+	\begin{equation}
+		\norm{u(t)}_2^2 + \int_{\Omega}a\abs{\nabla u}^p \leq \rho,
+	\end{equation}
+	for all $t \geq T$ and $u_0 \in B$, where $u(t) = S(t)u_0$.
+\end{theorem}
+\begin{proof}
+	If we multiply \cref{eq:main} by $u$ and integrate over $\Omega$,
+	then we have
+	\begin{equation}\label{eq:operate_u}
+		\frac{1}{2}\frac{d}{dt}\norm{u}_2^2
+		+ \int_\Omega a\abs{\nabla u}^p
+		+ \int_\Omega b\abs{\nabla u}^2u = 0,
+	\end{equation}
+	since $p \geq 4$, use H\"older's inequality,
+	\begin{equation}
+			\int_{\Omega}\abs{\nabla u}^2
+			= \int_{\Omega}a^{-\frac{2}{p}}a^{\frac{2}{p}}\abs{\nabla u}^2
+			\leq \left(\int_{\Omega}a^{-\frac{2}{p-2}}\right)^{\frac{p-2}{p}}
+			\left(\int_{\Omega}a\abs{\nabla u}^p\right)^{\frac{2}{p}}
+	\end{equation}
+	and use Poincar\`e's inequality, we have
+	\begin{equation}
+		\left(\int_{\Omega}\abs{u}^2\right)^{\frac{p}{2}}
+		\leq C\int_{\Omega}a\abs{\nabla u}^p,
+	\end{equation}
+	where $C$ only related with $\Omega$ and $p$. For the 3rd term, we could use
+	H\"older's inequality and Young's inequality to get the bound respectively,
+	\begin{equation}\label{eq:absorb_damping_u}
+		\begin{split}
+			\abs{\int_{\Omega}b\abs{\nabla u}^2 u}
+			&\leq \left(\int_{\Omega}a\abs{\nabla u}^p\right)^{\frac{2}{p}}
+			\left(\int_{\Omega}\abs{b a^{-\frac{2}{p}} u}^{\frac{p}{p-2}}\right)^{\frac{p-2}{p}}\\
+			&\leq \frac{1}{2}\int_{\Omega}a\abs{\nabla u}^p
+			+ 2^{\frac{p-2}{2}}\int_{\Omega}\abs{b a^{-\frac{2}{p}} u}^{\frac{p}{p-2}}\\
+			&\leq \frac{1}{2}\int_{\Omega}a\abs{\nabla u}^p
+			+ 2^{\frac{p-2}{2}}\left(\int_{\Omega}b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}}\right)^{\frac{p-4}{2(p-2)}}
+			\left(\int_{\Omega}u^2\right)^{\frac{p}{2(p-2)}}\\
+			&\leq \frac{1}{2}\int_{\Omega}a\abs{\nabla u}^p
+			+ \epsilon \left(\int_{\Omega}u^2\right)^{\frac{p}{2}}
+			+ C_{\epsilon}\left(\int_{\Omega}b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}}\right)^{\frac{p-4}{2(p-3)}},
+		\end{split}
+	\end{equation}
+	choose $\epsilon$ small enough and combine above estimates, we get
+	\begin{equation}\label{eq:DL2_L2_bd}
+		\frac{d}{dt}\norm{u}_2^2 + \norm{u}_2^p \leq C
+	\end{equation}
+	where $C$ independents on $u$. By the Gr\"onwall's inequality, we get the
+	bounded absorbing set in $L^2(\Omega)$, i.e.\ $\exists \rho_0$ and
+	$T_0 = T_0(\norm{u_0}_2)$ such that
+	\begin{equation}\label{eq:L2_bd}
+		\norm{u(t)}_2^2 \leq \rho_0 \text{ for } t \geq T_0.
+	\end{equation}
+	Applying \cref{eq:operate_u,eq:absorb_damping_u,eq:L2_bd}, we have
+	\begin{equation}\label{eq:DL2_W1pa_bd}
+		\frac{d}{dt}\norm{u}_2^2 + \int_{\Omega}a \abs{\nabla u}^p \leq C.
+	\end{equation}
+	If we multiply \cref{eq:main} by $u_{t}$ and integrate over $\Omega$,
+	then we have
+	\begin{equation}\label{eq:operate_ut}
+		\norm{u_t}_2^2
+		+ \frac{1}{p}\frac{d}{dt}\int_{\Omega}a \abs{\nabla u}^p
+		+ \int_{\Omega}b \abs{\nabla u}^2 u_t
+		= 0,
+	\end{equation}
+	estimate the 3rd term like \cref{eq:absorb_damping_u}, then we could get
+	\begin{equation}\label{eq:utL2_DW1pa_bd_W1pa}
+		C\norm{u_t}_2^2
+		+ \frac{d}{dt}\int_{\Omega}a \abs{\nabla u}^p
+		\leq \int_{\Omega}a \abs{\nabla u}^p
+		+ C,
+	\end{equation}
+	\cref{eq:DL2_W1pa_bd} $+$ \cref{eq:utL2_DW1pa_bd_W1pa} implies that
+	\begin{equation}\label{eq:utL2_DW1pa_DL2}
+		C\norm{u_t}_2^2
+		+ \frac{d}{dt}\left(\int_{\Omega}a \abs{\nabla u}^p
+		+ \norm{u}_2^2\right)
+		\leq C.
+	\end{equation}
+	Applying \cref{eq:DL2_L2_bd}, we have
+	\begin{equation}
+		\frac{d}{dt}\norm{u}_2^2 + \norm{u}_2^2 \leq C
+	\end{equation}
+	hence
+	\begin{equation}\label{eq:int_DL2_L2_bd}
+		\norm{u(t+1)}_2^2
+		+ \int_t^{t+1}\norm{u}_2^2
+		\leq C + \norm{u(t)}_2^2,
+	\end{equation}
+	similarity, applying \cref{eq:DL2_W1pa_bd}, we have
+	\begin{equation}\label{eq:int_DL2_W1pa_bd}
+		\norm{u(t+1)}_2^2
+		+ \int_t^{t+1}\int_{\Omega}a \abs{\nabla u}^p
+		\leq C + \norm{u(t)}_2^2,
+	\end{equation}
+	combine \cref{eq:int_DL2_L2_bd,eq:int_DL2_W1pa_bd}, we have
+	\begin{equation}\label{eq:int_W1pa_L2}
+		\int_t^{t+1}\int_{\Omega}a \abs{\nabla u}^p
+		+ \norm{u}_2^2 \leq C \text{ for } t \geq T_0.
+	\end{equation}
+	Applying \cref{eq:utL2_DW1pa_DL2,eq:int_W1pa_L2}, use Uniform Gr\"onwall's Lemma we get the bounded
+	absorbing set in $W_0^{1,p}(a,\Omega)$, i.e\ $\exists \rho$ and $T \geq T_{0}$ such that
+	\begin{equation}\label{eq:uL2_W1pa_bd}
+		\norm{u(t)}_2^2 + \int_{\Omega}a\abs{\nabla u}^p \leq \rho \text{ for } t \geq T,
+	\end{equation}
+	hence we completed this proof.
+\end{proof}
+Since $p \geq 4$, by the compact embedding
+$W_0^{1,p}(\Omega) \subset\subset L^2(\Omega)$
+and \cref{thm:absorb} yield the existence of a global attractor in $L^2(\Omega)$
+immediately.
+\begin{theorem}\label{thm:attractor_L2}
+	The semigroup $\Brace{S(t)}_{t \geq 0}$ generated by the weak solution of
+	\cref{eq:main} possesses a global attractor $\mathcal{A}_2$ in $L^2(\Omega)$.
+\end{theorem}
+Next we prove the existence of attractor in $W_0^{1,p}(\Omega)$. Firstly, we have
+to obtain $u_t$ bounded in $L^2(\Omega)$, but unfortunately, we cannot get
+uniform boundedness of $u_t$ when $\abs{\nabla u}$ small enough, hence we consider
+the boundedness of $\norm{u_t}_2$ while $\abs{\nabla u} > 1$, and the boundedness
+of $-\frac{d}{dt}\norm{u}_2$ while $\abs{\nabla u} \leq 1$.
+\begin{theorem}
+	For any bounded subset $B$ in $L^2(\Omega)$, if $\abs{\nabla u} > 1$,
+	there exists a constant $T' = T'(B) > 0$, such that
+	\begin{equation}
+		\norm{u_t(s)}_2^2 \leq M, \quad \forall u_0 \in B \text{ and } s \geq T'.
+	\end{equation}
+\end{theorem}
+\begin{proof}
+	% \begin{proofpart}
+	% 	First we consider the situation of $\abs{\nabla u} \to 0$ as $t \to t_0$,
+	% 	where $t_0 \in \R^{+}\cup\Brace{+\infty}$, without loss of generality,
+	% 	we assume $\abs{\nabla u} \leq 1$.
+	% 	If we multiply \cref{eq:main} by any fixed $\phi \in C_c^{\infty}(\Omega)$
+	% 	and integrate over $\Omega$, then take limits, we have,
+	% 	\begin{equation}
+	% 		\begin{split}
+	% 			\lim_{t \to t_0}\int_{\Omega}u_t \phi
+	% 			= - \lim_{t \to t_0}\int_{\Omega}a\abs{\nabla u}^{p-2} \nabla u
+	% 			\cdot \nabla \phi
+	% 			- \lim_{t \to t_0}\int_{\Omega}b\abs{\nabla u}^2 \phi
+	% 			= 0
+	% 		\end{split}
+	% 	\end{equation}
+	% \end{proofpart}
+	By differentiating \cref{eq:main} in time and denoting $v = u_t$, we have
+	\begin{equation}
+		\begin{split}
+			v_t
+			= \Div\left(a\abs{\nabla u}^{p-2}\nabla v\right)
+			+ \Div\left(\left(p-2\right)a \abs{\nabla u}^{p-4}\left(\nabla u \cdot \nabla v\right)\nabla u\right)
+			- 2b\nabla u \cdot \nabla v.
+		\end{split}
+	\end{equation}
+	We multiply above equation by $v$ and integrate over $\Omega$, then we have
+	\begin{equation}
+		\begin{split}
+			\frac{1}{2}\frac{d}{dt}\norm{v}_2^2
+			+ \int_{\Omega}a\abs{\nabla u}^{p-2}\abs{\nabla v}^2
+			&+ \int_{\Omega}\left(p-2\right)a\abs{\nabla u}^{p-4}\left(\nabla u
+			\cdot \nabla v\right)^2\\
+			&+ 2\int_{\Omega}b\nabla u \cdot \nabla v v
+			= 0.
+		\end{split}
+	\end{equation}
+	Now we estimate the damping term,
+	\begin{equation}
+		\begin{split}
+			\int_{\Omega}b\nabla u \cdot \nabla v v
+			&\leq \left(\int_{\Omega}b^2\left(\nabla u
+			\cdot \nabla v\right)^2\right)^{\frac{1}{2}}
+			\*\norm{v}_2\\
+			&\leq \norm{b^2 a^{-1}}_{\infty}^{\frac{1}{2}}
+			\left(\int_{\Omega}a\abs{\nabla u}^2\abs{\nabla v}^2\right)^{\frac{1}{2}}\norm{v}_2\\
+			&\leq \norm{b^2 a^{-1}}_{\infty}^{\frac{1}{2}}
+			\left(\int_{\Omega}a\left(\abs{\nabla u}+1\right)^2\abs{\nabla v}^2\right)^{\frac{1}{2}}\norm{v}_2\\
+			% &= \norm{b^2 a^{-1}}_{\infty}^{\frac{1}{2}}
+			% \left(
+			% \int_{\Omega}a\left(
+			% \left(\abs{\nabla u}+1\right)^2 + 1 - 2\left(\abs{\nabla u}+1\right)
+			% \right)\abs{\nabla v}^2
+			% \right)^{\frac{1}{2}}\norm{v}_2\\
+			&\leq \norm{b^2 a^{-1}}_{\infty}^{\frac{1}{2}}
+			\left(\int_{\Omega}a\left(\abs{\nabla u}+1\right)^{p-2}\abs{\nabla v}^2\right)^{\frac{1}{2}}\norm{v}_2\\
+			&\leq \epsilon \int_{\Omega}a\left(\abs{\nabla u}+1\right)^{p-2}\abs{\nabla v}^2
+			+ C(\epsilon) \norm{v}_2^2,
+		\end{split}
+	\end{equation}
+	for the 2nd term
+	\begin{equation}
+		\begin{split}
+			\int_{\Omega}a\abs{\nabla u}^{p-2}\abs{\nabla v}^2
+			\geq 2^{3-p}\int_{\Omega}a\left(\abs{\nabla u}+1\right)^{p-2}\abs{\nabla v}^2
+			- \int_{\Omega}a\abs{\nabla v}^2.
+		\end{split}
+	\end{equation}
+	hence we have
+	\begin{equation}\label{eq:DvL2_bd_vL2}
+		\begin{split}
+			& \frac{1}{2}\frac{d}{dt}\norm{v}_2^2
+			+ C\int_{\Omega}a\left(\abs{\nabla u}+1\right)^{p-2}\abs{\nabla v}^2\\
+			+{} & \int_{\Omega}\left(p-2\right)a\abs{\nabla u}^{p-4}\left(\nabla u
+			\cdot \nabla v\right)^2
+			\leq C\norm{v}_2^2 + C.
+		\end{split}
+	\end{equation}
+	Now applying \cref{eq:utL2_DW1pa_bd_W1pa,eq:uL2_W1pa_bd,eq:DvL2_bd_vL2},
+	we could get
+	\begin{equation}
+		\begin{split}
+			\frac{d}{dt}\left(
+			\norm{v}_2^2 + C\int_{\Omega}a\abs{\nabla u}^p
+			\right)
+			\leq C,
+		\end{split}
+	\end{equation}
+	next we integrating \cref{eq:utL2_DW1pa_DL2} from $t$ to $t+1$, we have
+	\begin{equation}
+		\begin{split}
+			\int_{\Omega}a\abs{\nabla u(t+1)}^p
+			+ \norm{u(t+1)}_2^2
+			+ C\int_t^{t+1}\norm{v}_2^2
+			\leq C + \int_{\Omega}a\abs{\nabla u(t)}^p
+			+ \norm{u(t)}_2^2,
+		\end{split}
+	\end{equation}
+	hence for $t$ large enough, we have
+	\begin{equation}
+		\begin{split}
+			\int_t^{t+1}\left(
+			\norm{v}_2^2 + C\int_{\Omega}a\abs{\nabla u}^p
+			\right) \leq C,
+		\end{split}
+	\end{equation}
+	then we use Uniform Gr\"onwall's Lemma could get, there exists $M > 0$ such that
+	\begin{equation}
+		\begin{split}
+			\norm{v(t)}_2^2
+			+ \int_{\Omega}a\abs{\nabla u}^p \leq M \text{ for } t \geq T' \geq T,
+		\end{split}
+	\end{equation}
+	hence we completed this proof.
+\end{proof}
+\begin{theorem}
+	The semigroup $\Brace{S(t)}_{t \geq 0}$ associated with \cref{eq:main} possesses
+	a global attractor $\mathcal{A}_v$ in $W_0^{1,p}(\Omega)$, i.e.\
+	$\mathcal{A}_V$ is compact in $W_0^{1,p}(\Omega)$, invariant and attracts the
+	bounded sets of $L^2(\Omega)$ in the topology of $W_0^{1,p}(\Omega)$.
+\end{theorem}
+\begin{proof}
+	In this prove, all we need to show is that $\Brace{S(t)}_{t \geq 0}$ is
+	asymptotically compact in $W_0^{1,p}(\Omega)$.
+	Let $B_0$ be a bounded absorbing set in $W_0^{1,p}(\Omega)$ obtained in
+	\cref{thm:absorb}, then we need to verify for any sequence
+	$\Brace{u_{0n}}_{n=1}^{\infty} \subset B_0$, $\Brace{u_n(t_n)}_{n=1}^{\infty}$
+	possesses a convergence subsequence in $W_0^{1,p}(\Omega)$.
+
+	Indeed thanks to \cref{thm:attractor_L2}, we have
+	$\Brace{u_n(t_n)}_{n=1}^{\infty}$ is precompact in $L^2(\Omega)$.
+	So we could take a subsequence in $\Brace{u_n(t_n)}_{n=1}^{\infty}$ is a
+	Cauchy sequence in $L^2(\Omega)$
+	and still denote as $\Brace{u_n(t_n)}_{n=1}^{\infty}$. Since $p \geq 4$ and
+	applying H\"older's inequality, we have
+	\begin{equation*}
+		\begin{split}
+			& \int_{\Omega}a\abs{\nabla u_m(t_m) - \nabla u_n(t_n)}^p\\
+			\leq{} & C\int_{\Omega}a
+			\left(\abs{\nabla u_m(t_m)}^{p-2}\nabla u_m(t_m)
+			- \abs{\nabla u_n(t_n)}^{p-2}\nabla u_n(t_n)\right)
+			\*\nabla\left(u_m(t_m) - u_n(t_n)\right)\\
+			={} & C\left(\int_{\Omega}\left(u_n-u_m\right)_t\left(u_m-u_n\right)
+			- \int_{\Omega}b\left(\abs{\nabla u_m}^2 - \abs{\nabla u_n}^2\right)
+			\left(u_m - u_n\right)\right)\\
+			\leq{} & C\norm{\left(u_n-u_m\right)_t}_2\norm{u_m-u_n}_2\\
+			+{} & C\left(\int_{\Omega}a\left(\abs{\nabla u_m}^p
+			+ \abs{\nabla u_n}^p\right)\right)^{\frac{2}{p}}
+			\left(b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}}\right)^{\frac{p-4}{2p}}
+			\norm{u_m-u_n}_2 \to 0
+		\end{split}
+	\end{equation*}
+	as $m$, $n \to \infty$. Hence applying \cref{thm:absorb}, the semigroup $\Brace{S(t)}_{t \geq 0}$
+	possesses a global attractor $\mathcal{A}_V$ in $W_0^{1,p}(\Omega)$.
+\end{proof}
+\bibliographystyle{plain}
+\bibliography{Remote}
+
+\end{document}
