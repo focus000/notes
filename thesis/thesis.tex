@@ -10,6 +10,7 @@
 \addbibresource{DynamicalSystem.bib}
 \addbibresource{background.bib}
 \addbibresource{pre.bib}
+\addbibresource{intro.bib}
 
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}[theorem]{Corollary}
@@ -72,6 +73,18 @@ weighted $p$-laplace equation that reads
 where $\Omega$ is a bounded open domain in $\R^{n}$ with a sufficiently smooth boundary $\partial\Omega$, $p>1$.
 $ a(x)$, $b(x) \in C^1(\bar{\Omega}) $, $b(x) \geq 0$, and $a(x) > 0$ in $\Omega$, $a(x) = 0$ on $\partial\Omega$.
 
+$p$-Laplacian parabolic equations have been considered for the past several decades
+(see \autocite{liuAsymptoticRegularityPLaplacian2010,zhongZ2IndexGlobal2010,acerbiRegularityResultsStationary2002,rajagopalMathematicalModelingElectrorheological2001,aboulaichNewDiffusionModels2008,guoSingularPhenomenaSolutions2015,antontsevUniquenessComparisonTheorems2013,gaoExistenceUniquenessNonexistence2016,liuNonlinearDiffusionProblem2019,guoStudyWeakSolutions2011,antontsevParabolicEquationsAnisotropic2007,constantinGlobalExistenceFully2006,constantinGlobalSolutionsQuasilinear2002},
+and reference there in).
+In particular, the class of weighted $p$-laplace type equations have been of great interest for recent years
+because of the development of PDEs theory and applications of such equations in
+many branches of applied sciences such as image
+denoising, model growing/collapsing sandpiles,
+model Newtonian and non Newtonian Fluids, type-II superconductivity theory etc
+(see \autocite{aronssonFastSlowDiffusion1996,aubertMathematicalProblemsImage2006,mastorakisSolutionPLaplacianNonNewtonian2009,yinLaplacianTypeEvolution2001} and reference therein).
+Therefore, many researchers began to do many works about such equations
+(\autocite{cortazarExistenceSignChanging2014,musinaExistenceMultiplicityResults2009,gazziniSobolevtypeInequalityRelated2009,liLongtimeBehaviorClass2014b,maGlobalAttractorsWeighted2012a,cavalheiroWeightedSobolevSpaces2008,caldiroliVariationalDegenerateElliptic2000,leBoundaryValueProblems1998,monticelliMaximumPrinciplesWeak2009,dibenedettoDegenerateSingularParabolic1993,galClassDegenerateParabolic2012,yinEvolutionaryWeightedPLaplacian2007,Zhan2019Uniquenessa})
+
 The PDEs which are conservative or have some dissipative property
 usually could generate dynamical systems. For the last case, one can
 hope all the trajectories could be attracted into a bound sets even
@@ -94,24 +107,7 @@ has widely used in many branches of applied sciences such as image
 denoising, model growing/collapsing sandpiles, model Newtonian and non Newtonian Fluids, type-II superconductivity theory etc (see \autocite{aronssonFastSlowDiffusion1996,aubertMathematicalProblemsImage2006,mastorakisSolutionPLaplacianNonNewtonian2009,yinLaplacianTypeEvolution2001} and reference therein).
 
 Now let's go back to the statement of the main results in the present paper. In order to prove the existence of the attractor, firstly, we need to define a semigroup in some suitable space. In Zhan's paper~\cite{Zhan2019Uniquenessa}, the author has proved the existence and uniqueness of the weak solution to \cref{eq:main} with positive initial data in $L^{\infty}(\Omega) \cap W_0^{1,p}(a,\Omega)$, which is
-\begin{theorem}\cite{Zhan2019Uniquenessa}\label{thm:zhan}
-	If $p>4$, $a(x)$, $b(x)$ satisfies
-	\begin{equation}
-		\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c,
-	\end{equation}
-	and $u_0$ satisfies
-	\begin{equation}
-		u_0 \in L^{\infty}(\Omega), a(x)u_0 \in W_0^{1,p}(\Omega),
-	\end{equation}
-	then \cref{eq:main} has unique nonnegative weak solution satisfies
-	\begin{equation}
-		u \in L^{\infty}(Q_T), a(x)\abs{\nabla u}^p \in L^1(Q_T).
-	\end{equation}
-	The initial value is satisfied in the sense of that
-	\begin{equation}
-		\lim_{t \to 0}\int_{\Omega}\abs{u(x,t) - u_0(x)}dx = 0.
-	\end{equation}
-\end{theorem}
+
 In this paper we release the condition of initial data as
 $u_0 \in L^2(\Omega)$, and get the existence and
 uniqueness of the weak solution. Futhermore, we use
@@ -174,50 +170,50 @@ be a locally summable nonnegative function, i.e.\ a weight.
 \end{remark}
 Next we give a lemma which is helpful to deal with $p$-laplacian.
 \begin{lemma}\label{lem:VecIneq}
-	Let $a$ and $b$ denoting vectors in $\R^{n}$, if $p \geq 4$, then we have
+	Let $\alpha$ and $\beta$ denoting vectors in $\R^{n}$, if $p \geq 4$, then we have
 	\begin{equation}
-		\abs{a^2 - b^2}^{\frac{p}{2}}
-		\leq C \langle \abs{a}^{p-2}a - \abs{b}^{p-2}b, a-b\rangle
+		\abs{\alpha^2 - \beta^2}^{\frac{p}{2}}
+		\leq C \langle \abs{\alpha}^{p-2}\alpha - \abs{\beta}^{p-2}\beta, \alpha-\beta\rangle
 	\end{equation}
 \end{lemma}
 \begin{proof}
 	when $p \geq 1 $
 	\begin{equation}\label{eq:p_ineq}
-		\abs{a-b}^p \leq C\abs{\abs{a}^{p-1}a - \abs{b}^{p-1}b},
+		\abs{\alpha-\beta}^p \leq C\abs{\abs{\alpha}^{p-1}\alpha - \abs{\beta}^{p-1}\beta},
 	\end{equation}
-	to prove this, firstly, for $n = 1$ and $a$, $b \geq 0$, we have
+	to prove this, firstly, for $n = 1$ and $\alpha$, $\beta \geq 0$, we have
 	\begin{equation}
-		\abs{a-b}^p \leq \abs{a^p - b^p}.
+		\abs{\alpha-\beta}^p \leq \abs{\alpha^p - \beta^p}.
 	\end{equation}
-	Without loss of generality, we assume $a \leq b$, let
+	Without loss of generality, we assume $\alpha \leq \beta$, let
 	\begin{equation}
-		f(x) = (b-a+x)^p - x^p,
+		f(x) = (\beta-\alpha+x)^p - x^p,
 	\end{equation}
 	then
 	\begin{equation}
-		f'(x) = p\left((b-a+x)^{p-1} - x^{p-1}\right) \geq 0,
+		f'(x) = p\left((\beta-\alpha+x)^{p-1} - x^{p-1}\right) \geq 0,
 	\end{equation}
 	hence
 	\begin{equation}
-		\left(b-a\right)^p = f(0) \leq f(a) = b^p - a^p.
+		\left(\beta-\alpha\right)^p = f(0) \leq f(\alpha) = \beta^p - \alpha^p.
 	\end{equation}
 	Applying jensen's inequality, we also have
 	\begin{equation}
-		\left(a+b\right)^p \leq 2^{p-1}\left(a^p + b^p\right),
+		\left(\alpha+\beta\right)^p \leq 2^{p-1}\left(\alpha^p + \beta^p\right),
 	\end{equation}
 	hence we proved \cref{eq:p_ineq} while $n = 1$, for $n > 1$, we need use
 	the law of cosines, assume $\gamma$ is the angle contained between sides
-	of lengths $a$ and $b$, we have
+	of lengths $\alpha$ and $\beta$, we have
 	\begin{equation}
 		\begin{split}
-			\left(\abs{a-b}^p\right)^2
-			&= \left(a^2 + b^2 - 2 \abs{a}\abs{b}\cos{\gamma}\right)^p\\
-			&\leq \left(a^2+b^2\right)^p - 2^p\abs{a}^p\abs{b}^p\cos^p{\gamma}\\
-			&\leq 2^{p-1}\left(a^{2p} + b^{2p} - 2\abs{a}^p\abs{b}^p\cos^p{\gamma}\right)\\
-			&\leq \left(2^{p-1}+C\right)\left(a^{2p} + b^{2p}\right)
-			- \left(2^{p-1}\cos^p{\gamma}+C\right)2\abs{a}^p\abs{b}^p\\
-			&\leq \left(2^{p-1}+C\right)\left(a^{2p} + b^{2p} - 2\abs{a}^p\abs{b}^p\cos{\gamma}\right)\\
-			&= \left(2^{p-1}+C\right)\abs{\abs{a}^{p-1}a - \abs{b}^{p-1}b}^2,
+			\left(\abs{\alpha-\beta}^p\right)^2
+			&= \left(\alpha^2 + \beta^2 - 2 \abs{\alpha}\abs{\beta}\cos{\gamma}\right)^p\\
+			&\leq \left(\alpha^2+\beta^2\right)^p - 2^p\abs{\alpha}^p\abs{\beta}^p\cos^p{\gamma}\\
+			&\leq 2^{p-1}\left(\alpha^{2p} + \beta^{2p} - 2\abs{\alpha}^p\abs{\beta}^p\cos^p{\gamma}\right)\\
+			&\leq \left(2^{p-1}+C\right)\left(\alpha^{2p} + \beta^{2p}\right)
+			- \left(2^{p-1}\cos^p{\gamma}+C\right)2\abs{\alpha}^p\abs{\beta}^p\\
+			&\leq \left(2^{p-1}+C\right)\left(\alpha^{2p} + \beta^{2p} - 2\abs{\alpha}^p\abs{\beta}^p\cos{\gamma}\right)\\
+			&= \left(2^{p-1}+C\right)\abs{\abs{\alpha}^{p-1}\alpha - \abs{\beta}^{p-1}\beta}^2,
 		\end{split}
 	\end{equation}
 	when $C$ large enough, indeed
@@ -232,29 +228,49 @@ Next we give a lemma which is helpful to deal with $p$-laplacian.
 
 	On the other hand, we have
 	\begin{equation}
-		\abs{\abs{b}^{p-1}b - \abs{a}^{p-1}a} \leq p\abs{b-a}\int_0^1 \abs{a + t(b - a)}^{p-1}dt.
+		\abs{\abs{\beta}^{p-1}\beta - \abs{\alpha}^{p-1}\alpha} \leq p\abs{\beta-\alpha}\int_0^1 \abs{\alpha + t(\beta - \alpha)}^{p-1}dt.
 	\end{equation}
 	Note that, if $p \geq 2$, we have
 	\begin{equation}\label{eq:VecIneq_1}
-		\langle \abs{a}^{p-2}a - \abs{b}^{p-2}b, a-b\rangle
-		\geq \abs{a-b}^2\int_0^1 \abs{b + t(a - b)}^{p-2}dt,
+		\langle \abs{\alpha}^{p-2}\alpha - \abs{\beta}^{p-2}\beta, \alpha-\beta\rangle
+		\geq \abs{\alpha-\beta}^2\int_0^1 \abs{\beta + t(\alpha - \beta)}^{p-2}dt,
 	\end{equation}
 	the proof of~\cref{eq:VecIneq_1} could find in~\cite{lindqvistNotesStationaryPLaplace2019}.
 	Hence when $p \geq 4$ we have
 	\begin{equation}
 		\begin{split}
-			\abs{a^2 - b^2}^{\frac{p}{2}}
-			&\leq 2^{\frac{p}{2}}\abs{a-b}^{\frac{p}{2}}
-			\left(\int_0^1 \abs{b + t(a - b)}dt\right)^{\frac{p}{2}}\\
-			&\leq C\frac{p-2}{2}2^{\frac{p}{2}}\abs{a-b}^2
-			\left(\int_0^1 \abs{b + t(a - b)}^{\frac{p-4}{2}}dt\right)\\
-			&\times\left(\int_0^1 \abs{b + t(a - b)}dt\right)^{\frac{p}{2}}\\
-			&\leq C\frac{p-2}{2}2^{\frac{p}{2}}\abs{a-b}^2
-			\int_0^1 \abs{b + t(a - b)}^{p-2}dt\\
-			&\leq C \langle \abs{a}^{p-2}a - \abs{b}^{p-2}b, a-b\rangle
+			\abs{\alpha^2 - \beta^2}^{\frac{p}{2}}
+			&\leq 2^{\frac{p}{2}}\abs{\alpha-\beta}^{\frac{p}{2}}
+			\left(\int_0^1 \abs{\beta + t(\alpha - \beta)}dt\right)^{\frac{p}{2}}\\
+			&\leq C\frac{p-2}{2}2^{\frac{p}{2}}\abs{\alpha-\beta}^2
+			\left(\int_0^1 \abs{\beta + t(\alpha - \beta)}^{\frac{p-4}{2}}dt\right)\\
+			&\times\left(\int_0^1 \abs{\beta + t(\alpha - \beta)}dt\right)^{\frac{p}{2}}\\
+			&\leq C\frac{p-2}{2}2^{\frac{p}{2}}\abs{\alpha-\beta}^2
+			\int_0^1 \abs{\beta + t(\alpha - \beta)}^{p-2}dt\\
+			&\leq C \langle \abs{\alpha}^{p-2}\alpha - \abs{\beta}^{p-2}\beta, \alpha-\beta\rangle
 		\end{split}
 	\end{equation}
 \end{proof}
+
+Finally, we need the following theorem to help us proof existence and uniqueness of the weak solution,
+\begin{theorem}\cite[thm 1.3 and 1.6]{Zhan2019Uniquenessa}\label{thm:zhan}
+	If $p>4$, $a(x)$, $b(x)$ satisfies
+	\begin{equation}
+		\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c,
+	\end{equation}
+	and $u_0$ satisfies
+	\begin{equation}
+		0 \leq u_0 \in L^{\infty}(\Omega), a(x)u_0 \in W_0^{1,p}(\Omega),
+	\end{equation}
+	then \cref{eq:main} has unique nonnegative weak solution satisfies
+	\begin{equation}
+		u \in L^{\infty}(Q_T), a(x)\abs{\nabla u}^p \in L^1(Q_T).
+	\end{equation}
+	The initial value is satisfied in the sense of that
+	\begin{equation}
+		\lim_{t \to 0}\int_{\Omega}\abs{u(x,t) - u_0(x)}dx = 0.
+	\end{equation}
+\end{theorem}
 
 \section{Existence and uniqueness of the weak solution}\label{sec:Existence_and_uniqueness_of_the_weak_solution}
 Now we prove the existence of the weak solution.
@@ -263,17 +279,46 @@ satisfied strictly conditions (see \cref{thm:zhan}),
 we can use these
 initial data to approach $u_0 \in L^2$.
 \begin{theorem}\label{thm:absorb}
-If~\cref{eq:main} satisfy conditions in~\cite[thm 1.3]{Zhan2019Uniquenessa}, and $u_0 \in L^2(\Omega) $, then it has a weak solution satisfies
+If $p>4$ in~\cref{eq:main}, $a(x)$, $b(x)$ satisfies
+\begin{equation}
+	\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c,
+\end{equation}
+and $u_0 \in L^2(\Omega) $, then it has a weak solution satisfies
 \begin{equation}
 u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
 \end{equation}
 \end{theorem}
 
 \begin{proof}
-\begin{proofpart}[remove positive initial value from {\cite[thm 1.3]{Zhan2019Uniquenessa}}]
-	let $u_{\epsilon,0} \in C_0^\infty(\Omega) $, $au_{\epsilon,0} \to au_0 $ in
+	First of all, we prove a stronger existence conclusion based on {\cite{Zhan2019Uniquenessa}}, which limits $u_0$ as
+	\begin{equation}\label{initial_data_condition_tmp}
+		u_0 \in L^{\infty}(\Omega) \cap W_0^{1, p}(a, \Omega).
+	\end{equation}
+	We now consider the following regularized problem
+\begin{gather}
+	u_{\epsilon t}-\Div\left((a(x)+\epsilon)
+	\left(\left|\nabla u_{\epsilon}\right|^{2}+\epsilon\right)^{\frac{p-2}{2}} \nabla u_{\epsilon}\right)
+	+b(x)\left|\nabla u_{\epsilon}\right|^{2} = 0,(x, t) \in Q_{T} \label{eq:approximated_maineq} \\
+	u_{\epsilon}(x, t)  = 0, \quad(x, t) \in \partial \Omega \times(0, T)\\
+	u_{\epsilon}(x, 0)  = u_{\epsilon, 0}(x), \quad x \in \Omega
+\end{gather}
+	it is well-know that above problem has a unique classical solution.
+
+	Using the method of convolution a sequence of mollifiers,
+	we could find a sequence $\norm{u_{\epsilon, 0}}_{\infty}$ bounded uniformly
+	and $u_{\epsilon,0} \in C_0^\infty(\Omega) $, $au_{\epsilon,0} \to au_0 $, in
 	$W_0^{1,p}(\Omega) $, by maximum principle we have $\abs{u_{\epsilon}} \leq C$,
 	where $C$ only depends on $\norm{u_0}_{\infty} $.
+
+	Multiplying \cref{eq:approximated_maineq} by $u_\epsilon$ and integrating it over $Q_T$, we get
+	\begin{equation}
+		\begin{split}
+			\frac{1}{2} \int_{\Omega} u_{\epsilon}^{2}
+			&+\iint_{Q_{T}}(a(x)+\epsilon)\left(\left|\nabla u_{\epsilon}\right|^{2}+\epsilon\right)^{\frac{p-2}{2}}\left|\nabla u_{\epsilon}\right|^{2}\\
+			&+\iint_{Q_{T}} b(x)\left|\nabla u_{\epsilon}\right|^{2} u_{\epsilon}  =\frac{1}{2} \int_{\Omega} u_{\epsilon, 0}^{2}.
+		\end{split}
+	\end{equation}
+	By the fact
 	\begin{equation}
 		\begin{split}
 			\abs{\int_0^T\int_{\Omega} b\abs{\nabla u_{\epsilon}}^2u_{\epsilon}}
@@ -283,9 +328,33 @@ u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
 			&\leq \eta\int_0^T\int_{\Omega}\abs{u_{\epsilon}}^2 + \frac{1}{2}\int_0^T\int_{\Omega} a\abs{\nabla u_{\epsilon}}^p + C(\eta)
 		\end{split}
 	\end{equation}
-	then just as the prove in~\cite[thm 1.3]{Zhan2019Uniquenessa}, we have the weak solution.
-\end{proofpart}
-\begin{proofpart}[$u_0 \in L^2(\Omega)$]
+	we have
+	\begin{equation}
+		\begin{split}
+			\frac{1}{2} \int_{\Omega} u_{\epsilon}^{2}
+			&+\iint_{Q_{T}}(a(x)+\epsilon)\left(\left|\nabla u_{\epsilon}\right|^{2}+\epsilon\right)^{\frac{p-2}{2}}\left|\nabla u_{\epsilon}\right|^{2}\\
+			&\leq \frac{1}{2}\iint_{Q_T}a\abs{\nabla u_\epsilon}^p + C.
+		\end{split}
+	\end{equation}
+	As well as
+	\begin{equation}
+		\begin{split}
+			\iint_{Q_T}a\abs{\nabla u_\epsilon}^p
+			\leq \iint_{Q_{T}}(a(x)+\epsilon)\left(\left|\nabla u_{\epsilon}\right|^{2}+\epsilon\right)^{\frac{p-2}{2}}\left|\nabla u_{\epsilon}\right|^{2}
+			\leq \frac{1}{2}\iint_{Q_T}a\abs{\nabla u_\epsilon}^p + C
+		\end{split}
+	\end{equation}
+	hence we have
+	\begin{equation}\label{eq:iint_adu}
+		\begin{split}
+			\iint_{Q_T}a\abs{\nabla u_\epsilon}^p \leq C.
+		\end{split}
+	\end{equation}
+	Indeed, \cref{eq:iint_adu} correspond to \cite[thm 1.3 eq. (2.5)]{Zhan2019Uniquenessa},
+	the remaining prove is similar as the prove in~\cite[thm 1.3]{Zhan2019Uniquenessa}, we omit it here and give the temporary conclusion:
+	\cref{eq:main} has a unique weak solution when the initial data satisfies conditions~\eqref{initial_data_condition_tmp}.
+
+	Second, we prove the existence conclusion with the initial data in $L^2(\Omega)$.
 	Choose $C_c^{\infty}(\Omega) \supset \Brace{u_{n, 0}}_{n=1}^{\infty} $
 	convergence to $u_0$ in $L^2(\Omega) $ as $n \to \infty $. $\forall u_{n, 0}$,
 	by the first part of this proof, there exist a unique $u_n$ as a weak solution satisfy \cref{eq:main}.
@@ -429,9 +498,7 @@ u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
 			\left(\int_0^T\int_{\Omega}v^2\right)^{\frac{1}{2}} \to 0
 		\end{split}
 	\end{equation}
-	as $n \to \infty$,
-\end{proofpart}
-hence we have completed the proof.
+	as $n \to \infty$, hence we have completed the proof.
 \end{proof}
 \begin{remark}
 	For $p>4$, we also could estimate \cref{un-umL2_0TW1p_bd_0TL2_L20} as

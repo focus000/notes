@@ -1,0 +1,25 @@
+\documentclass{article}
+
+\usepackage{mathtools}
+
+\newcommand*\abs[1]{\lvert#1\rvert}
+\newcommand*\norm[1]{\lVert#1\rVert}
+\newcommand*\Brace[1]{\lbrace#1\rbrace}
+% \newcommand*\innerproduct[1]{\langle#1\rangle}
+
+\newcommand\R{\mathbb{R}}
+
+\DeclareMathOperator{\Div}{div}
+
+\begin{document}
+    Similar with Zhan's paper, we consider the following regularized problem
+    \begin{equation}
+        \begin{alignedat}{1}
+            & u_{\epsilon t}
+            - \Div\left( \left( a(x)+\epsilon \right)\left( \abs(\nabla u_{\epsilon}^2+\epsilon)^{\frac{p-2}{2}}\nabla u_{\epsilon} \right) \right)
+            + b(x)\abs(\nabla u_{\epsilon})^2 = 0, (x, t) \in Q_T,\\
+            & u_{\epsilon}(x, t) = 0, (x,t) \in \partial\Omega \times (0, T),\\
+            & (x, 0) = u_{\epsilon 0}(x), x \in \Omega,  
+        \end{alignedat}
+    \end{equation}
+\end{document}
