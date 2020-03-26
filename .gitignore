@@ -10,6 +10,7 @@
 ## Intermediate documents:
 *.dvi
 *-converted-to.*
+thesis_zh/Thesis.pdf
 # these rules might exclude image files for figures etc.
 # *.ps
 # *.eps
