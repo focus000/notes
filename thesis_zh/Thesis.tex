@@ -556,49 +556,47 @@ u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
 	\end{equation}
 	对几乎处处 $0 \leq t \leq T$. 当 $p>4$ 时,
 	无法直接使用 Gr\"onwall's 不等式,
-	因为 $\frac{p}{2(p-2)}<1$. 但是可以用 Young 不等式提升指数到 $1$,
-	事实上由 \cref{un-umL2_0TW1p_bd_0TL2_L20} 得
+	因为 $\frac{p}{2(p-2)}<1$. 接下来用反证法证明当
 	\begin{equation}
-		\begin{split}
-			& \int_{\Omega}\left(u_n-u_m\right)^2(t)\\
-			+{} & \int_{0}^{t}\int_{\Omega}a
-			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
-			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
-			\left(\nabla u_n - \nabla u_m\right)\\
-			\leq{} & \epsilon\int_0^t\int_{\Omega}
-			\left(u_n-u_m\right)^2
-			+ \epsilon^{-\frac{p}{p-4}}C
-			+ \int_{\Omega}\left(u_n-u_m\right)^2(0),
-		\end{split}
+		\int_{\Omega}\left(u_n-u_m\right)^2(0) \to 0
 	\end{equation}
-	因此使用 Gr\"onwall's 不等式可以得到
-	\begin{equation}\label{un-umL2_gronwall}
-		\begin{split}
-			\int_{\Omega}\left( u_n-u_m \right)^2(t)
-			\leq \left( 
-				\epsilon^{-\frac{p}{p-4}}C
-				+ \int_{\Omega}\left(u_n-u_m\right)^2(0)
-				\right)e^{\epsilon t}
-		\end{split}
+	时
+	\begin{equation}
+		\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2 \to 0.
 	\end{equation}
-	对于几乎处处 $0 \leq t \leq T$. 令 $\epsilon = \delta t^{-1}$,
-	其中 $\delta > 0$ 是任意的, 对于几乎处处固定的 $0 \leq t \leq T$,
-	让 $n,m \to \infty$ 以及 $\delta \to 0$, 有
+	假设
+	\begin{equation*}
+		\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2 \not\to 0,
+	\end{equation*}
+	即存在 $\Brace{u_n}$ 的子列，同样记为 $\Brace{u_n}$ ，存在 $c_0 > 0, N > 0$ 使得
+	\begin{equation*}
+		\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2 > c_0, \quad n, m > N.
+	\end{equation*}
+	于是有
+	\begin{equation*}
+		\left(\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2\right)^{\frac{p}{2(p-2)}}
+		\leq c_0^{\frac{4-p}{2p-2}}\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2,
+	\end{equation*}
+	再由\cref{un-umL2_0TW1p_bd_0TL2_L20}得：
+	\begin{equation}
+		\int_{\Omega}\left(u_n-u_m\right)^2(t)
+		\leq C\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2
+		+ \int_{\Omega}\left(u_n-u_m\right)^2(0).
+	\end{equation}
+	再通过 Gr\"onwall's 不等式，$n, m \to \infty$ 时：
+	\begin{equation}
+		\int_{\Omega}\left( u_n-u_m \right)^2(t)
+			\leq \int_{\Omega}\left(u_n-u_m\right)^2(0)e^{Ct} \to 0.
+	\end{equation}
+	由控制收敛定理得到
+	\begin{equation}
+		\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2 \to 0, \quad n, m \to \infty,
+	\end{equation}
+	导出矛盾. 对于几乎处处 $0 \leq t \leq T$，让 $n,m \to \infty$，有
 	\begin{equation}\label{cauchy_in_L2}
 		\norm{u_n(t,\cdot)-u_m(t,\cdot)}_{L^2(\Omega)} \to 0,
 	\end{equation}
-	因此对于几乎处处固定的 $0 \leq t \leq T$, 存在
-	$u(t,\cdot) \in L^2(\Omega)$ 使得
-	\begin{equation}
-		\norm{u_n(t,\cdot)-u(t,\cdot)}_{L^2(\Omega)} \to 0
-	\end{equation}
-	当 $n \to \infty$, 由 $u_n(t, \cdot)$ 在
-	 $L^2(\Omega)$ 的连续性, 得到
-	\begin{equation}
-		\lim_{t' \to t}\norm{u(t,\cdot)-u(t',\cdot)}_{L^2(\Omega)}=0.
-	\end{equation}
-	应用 \cref{cauchy_in_L2} 到 \cref{un-umL2_0TW1p_bd_0TL2_L20},
-	有
+	以及
 	\begin{equation}\label{cauchy_in_W1pa}
 		\int_{0}^{t}\int_{\Omega}a
 		\left(\abs{\nabla u_n}^{p-2}\nabla u_n
@@ -617,12 +615,20 @@ u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
 		\end{split}
 	\end{equation}
 	因此存在 $u \in L^p(0, T; W_0^{1,p}(a,\Omega))
-	\cap C([0, T]; L^2(\Omega))$ 使得
+	\cap L^2(0, T; L^2(\Omega))$ 使得 $n \to \infty$ 时
 	\begin{equation}
 		u_{n} \to u
 	\end{equation}
-	在 $L^p(0, T; W_0^{1,p}(a,\Omega))\cap C([0, T]; L^2(\Omega))$
-	当 $n \to \infty$.
+	在 $L^p(0, T; W_0^{1,p}(a,\Omega))\cap L^2(0, T; L^2(\Omega))$.
+	当 $n \to \infty$, 由 $u_n(t, \cdot)$ 在
+	 $L^2(\Omega)$ 的连续性, 得到
+	\begin{equation}
+		\lim_{t' \to t}\norm{u(t,\cdot)-u(t',\cdot)}_{L^2(\Omega)}=0.
+	\end{equation}
+	即
+	\begin{equation*}
+		u \in C([0, T]; L^2(\Omega)).
+	\end{equation*}
 
 	最后我们考虑阻尼项, 应用 H\"older 不等式,
 	对任意的 $v \in C_c^\infty$,
@@ -640,24 +646,6 @@ u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
 	\end{equation}
 	当 $n \to \infty$, 以上我们完成了整个证明.
 \end{proof}
-\begin{remark}
-	当 $p>4$, 我们同样可以估计 \cref{un-umL2_0TW1p_bd_0TL2_L20} 为
-	\begin{equation}
-		\begin{split}
-			& \int_{\Omega}\left( u_n-u_m \right)(t)\\
-			+{} & \int_{0}^{t}\int_{\Omega}a
-			\left(\abs{\nabla u_n}^{p-2}\nabla u_n
-			- \abs{\nabla u_m}^{p-2}\nabla u_m\right)
-			\left(\nabla u_n - \nabla u_m\right)\\
-			\leq{} & C\int_0^t\int_{\Omega}
-			\left( u_n-u_m \right)^{\frac{p}{p-2}}
-			+ \int_{\Omega}\left( u_n-u_m \right)^2(0),
-		\end{split}
-	\end{equation}
-	由于 $\frac{p}{p-2}>1$, 用 Gr\"onwall 不等式,
-	再由相似的方法可以得到 \cref{cauchy_in_W1pa}.
-	由弱紧性定理我们也可以得到解的存在性
-\end{remark}
 通过~\cite{Zhan2019Uniquenessa}里相同的方法可以得到唯一性.
 现在我们可以定义解半群 $\Brace{S(t)}_{t>0}$,
 通过
