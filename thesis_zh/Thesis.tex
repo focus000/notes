@@ -5,7 +5,7 @@
 % !Mode:: "TeX:UTF-8"   %%winedt 以utf8编码打开
 
 %双行标题
-\documentclass[twoside,longtitle]{LZUthesis}
+\documentclass[oneside,longtitle]{LZUthesis}
 %单行标题
 %\documentclass[twoside]{LZUthesis}
 
@@ -184,15 +184,20 @@
 	\end{equation*}
 	其中 $\Omega$ 是在 $\R^{n}$ 里的有界光滑开区域, 边界记为 $\partial\Omega$, $p>1$.
 	$ a(x)$, $b(x) \in C^1(\bar{\Omega}) $, $b(x) \geq 0$, 在 $\Omega$ 内部 $a(x) > 0$, 在边界 $\partial\Omega$ 上 $a(x) = 0$.
-
-	若 $a(x)$, $b(x)$ 进一步的满足一些可积性条件, 如\cref{eq:zhan_intcondition}, 在~\citep{Zhan2019Uniquenessa}里作者给出了初值满足
-	\cref{eq:zhan_initdata}时非负解的存在唯一性. 本文将初值条件放宽到 $L^2(\Omega)$ 上证明了解的存在唯一性.
+	进一步的, $a(x), b(x)$ 满足可积性条件:
+	\begin{equation*}
+		\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c,
+	\end{equation*}
+	且 $u_0 \in L^2(\Omega) $, 那么方程存在唯一弱解满足
+	\begin{equation}
+		u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
+	\end{equation}
 
 	随后, 本文还研究了该方程的解的长时间行为, 通过先验估计得到了 $L^2(\Omega)$ 和 $W_0^{1,p}(\Omega)$ 上全局吸引子的存在性.
 \end{abstract}
 
 %中文关键词
-\keywords{全局吸引子, 全局解, 加权$p$-laplace方程}
+\keywords{全局吸引子, 弱解, 加权$p$-laplace方程}
 
 %英文摘要
 \begin{englishabstract}
@@ -206,17 +211,20 @@
 		\end{alignedat}
 	\end{equation}
 	where $\Omega$ is a bounded open domain in $\R^{n}$ with a sufficiently smooth boundary $\partial\Omega$, $p>1$.
-	$ a(x)$, $b(x) \in C^1(\bar{\Omega}) $, $b(x) \geq 0$, and $a(x) > 0$ in $\Omega$, $a(x) = 0$ on $\partial\Omega$.
-
-	if $a(x)$, $b(x)$ have extra conditions, Zhan has proved the existence and uniqueness of solution of this equation
-	which has positive initial data in $L^{\infty}(\Omega) \cap W_0^{1,p}(a,\Omega)$. In this article, we released the
-	initial data condition to $L^2(\Omega)$, then give the existence and uniqueness of solution either.
+	$ a(x)$, $b(x) \in C^1(\bar{\Omega}) $, $b(x) \geq 0$, and $a(x) > 0$ in $\Omega$, $a(x) = 0$ on $\partial\Omega$, and satisfies
+	\begin{equation}
+		\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c,
+	\end{equation}
+	and $u_0 \in L^2(\Omega) $, then it has a unique weak solution satisfies
+	\begin{equation}
+	u \in L^p(0, T; W_0^{1,p}(a,\Omega)), \quad u \in C([0, T]; L^2(\Omega)).
+	\end{equation}
 
 	Finally, this article gives the existence of global attractor in $L^2(\Omega)$ and $W_0^{1,p}(\Omega)$.
 \end{englishabstract}
 
 %英文关键词
-\englishkeywords{Global attractor, global solution, weighted $p$-laplacian}
+\englishkeywords{Global attractor, weak solution, weighted $p$-laplacian}
 
 %自动生成章节目录以及pdf书签
 \tableofcontents{}
@@ -303,7 +311,7 @@
 \begin{equation*}
 	u_t = \Div(\abs{\nabla u}^{p - 2}\nabla u)
 \end{equation*}
-解在 $C^{1, \alpha}$ 的正则性, 对于方程
+解在 $C^{1, \alpha}$ 的正则性, 而对于方程
 \begin{equation}\label{eq:plaplaceprime}
 	u_t = \Div(\abs{\nabla u}^{p - 2}\nabla u) - f(u) + g,
 \end{equation}
@@ -318,17 +326,21 @@
 (见 \citep{aronssonFastSlowDiffusion1996,aubertMathematicalProblemsImage2006,mastorakisSolutionPLaplacianNonNewtonian2009,yinLaplacianTypeEvolution2001}).
 因此, 许多学者在此类方程上做了很多工作
 (\citep{cortazarExistenceSignChanging2014,musinaExistenceMultiplicityResults2009,gazziniSobolevtypeInequalityRelated2009,liLongtimeBehaviorClass2014b,maGlobalAttractorsWeighted2012a,cavalheiroWeightedSobolevSpaces2008,caldiroliVariationalDegenerateElliptic2000,leBoundaryValueProblems1998,monticelliMaximumPrinciplesWeak2009,dibenedettoDegenerateSingularParabolic1993,galClassDegenerateParabolic2012,yinEvolutionaryWeightedPLaplacian2007,Zhan2019Uniquenessa}).
-最近, 有许多论文考虑了此类方程的全局吸引子.
-(见 \citep{anhGlobalExistenceLongtime2008,anhGlobalAttractorMsemiflow2010,anhLongtimeBehaviorQuasilinear2009,karachaliosConvergenceAttractorsDegenerate2005,karachaliosDynamicsDegenerateParabolic2006,karachaliosGlobalAttractorsConvergence2005})
-
-对于方程
+最近也有许多论文考虑了此类方程的全局吸引子,
+(见 \citep{anhGlobalExistenceLongtime2008,anhGlobalAttractorMsemiflow2010,anhLongtimeBehaviorQuasilinear2009,karachaliosConvergenceAttractorsDegenerate2005,karachaliosDynamicsDegenerateParabolic2006,karachaliosGlobalAttractorsConvergence2005}).
+而对于方程
 \begin{equation}
 	u_t = \Div(a(x)\abs{\nabla u}^{p-2}\nabla u) + f(u, x, t), \quad (x, t) \in Q_T = \Omega \times (0, T),
 \end{equation}
 文献\citep{maGlobalAttractorsWeighted2012a}证明了初值在 $L^2(\Omega)$, $f(u, x, t) = g(x) - f(u)$, 其中 $f(u)$ 满足增长性条件时解的适定性及全局吸引子的存在性.
 文献\citep{zhanParabolicEquationRelated2016}证明了当
 $a(x) = \rho^\alpha$, $f(u, x, t)$ 是 Lipschitz 函数, 初值在 $L^\infty(\Omega)$, 其中 $\rho(x) = dist(x, \partial \Omega), \alpha > 0, p > 1$ 时
-弱解的存在唯一性. 文献\citep{Zhan2019Uniquenessa}证明了当 $f(u, x, t) = -b(x)\abs{\nabla u}^2$, 初值在 $L^\infty(\Omega)$ 时解的适定性, 但对于吸引子还未有学者研究.
+弱解的存在唯一性. 文献\citep{Zhan2019Uniquenessa}证明了当 $f(u, x, t) = -b(x)\abs{\nabla u}^2$,
+且 $p > 4$ 或者 $n > 2, \frac{4}{n+2} \leq p \leq \frac{4}{n-2}$,
+非负初值 $u_0 \in L^\infty(\Omega), a(x)\nabla u_0 \in W_0^{1, p}(\Omega)$ 时存在唯一弱正解,
+这里 $a(x) > 0$ 在 $\Omega$ 内部, $a(x) = 0$ 在边界 $\partial\Omega$ 上,
+$b(x) \geq 0$ 且 $\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c$.
+但对于吸引子还未有学者研究.
 
 \section{本文研究的问题}
 本文主要研究了对于一类加权$p$-laplace方程导出的动力系统的渐进动力学行为,
@@ -340,19 +352,21 @@ $a(x) = \rho^\alpha$, $f(u, x, t)$ 是 Lipschitz 函数, 初值在 $L^\infty(\Om
 		& u = 0 \quad &\text{on } \partial\Omega,
 	\end{alignedat}
 \end{equation}
-其中 $\Omega$ 是在 $\R^{n}$ 里的有界光滑开区域, 边界记为 $\partial\Omega$, $p>1$.
+其中 $\Omega$ 是在 $\R^{n}$ 里的有界光滑开区域, 边界记为 $\partial\Omega$, $p>4$.
 $ a(x)$, $b(x) \in C^1(\bar{\Omega}) $, $b(x) \geq 0$, 在 $\Omega$ 内部 $a(x) > 0$, 在边界 $\partial\Omega$ 上 $a(x) = 0$.
 
-在\citep{Zhan2019Uniquenessa}中, 作者证明了初值在 $L^\infty(\Omega)$ 时正解的适定性,
-本文将初值条件从\citep{Zhan2019Uniquenessa}里的$u_0 \in L^{\infty}(\Omega) \cap W_0^{1,p}(a,\Omega)$的正值
-放宽到 $u_0 \in L^2(\Omega)$ 上的任意值, 并得到了相应解的存在唯一性.
-这里需要构造逼近方程去
-进一步的, 我们定义了 $L^2(\Omega) $ 上的解半群 $\Brace{S(t)}_{t \geq 0} $ 用以研究方程解的渐进行为.
-然而, 阻尼项在一些估计上带来了很多困难, 首先在解的存在性证明里,
-无法直接用 Gr\"onwall 不等式得到收敛性,
-其次, 嵌入定理的缺失使得我们在 \cref{thm:ut_L2_bd} 里估计
-$\norm{u_t(s)}_2^2$ 遇到了困难, 而这是证明 $W_0^{1,p}(\Omega)$ 里
-全局吸引子的存在性的核心估计.
+由\citep{Zhan2019Uniquenessa}启发, 研究了\cref{eq:main}在初值 $u_0 \in L^2(\Omega)$ 时解的存在唯一性以及关于时间的连续性,
+开始与\citep{Zhan2019Uniquenessa}的证明方法类似, 在初值 $u_0 \in L^\infty(\Omega)$ 时选取非退化的方程做逼近,
+得到解的存在唯一性后再将初值逼近到 $L^2(\Omega)$ 上, 在过程中主要遇到的困难是阻尼项在估计的过程中所产生的指数不合适,
+无法直接用 Gr\"onwall 不等式得到收敛性.
+
+进一步的, 我们定义了 $L^2(\Omega) $ 上解的连续半群 $\Brace{S(t)}_{t \geq 0} $ 用以研究方程解的渐进行为.
+主要考虑了在 $L^2(\Omega)$ 和 $W_0^{1, p}(\Omega)$ 上全局吸引子的存在性.
+对于 $L^2(\Omega)$ 上全局吸引子的存在性,
+我们主要通过证明有界吸收集的存在性即嵌入定理验证了一致紧性.
+而对于 $W_0^{1, p}(\Omega)$ 上全局吸引子的存在性,
+由于缺乏紧嵌入定理, 我们验证渐进紧性, 这里阻尼项会导致直接无法估计
+$\norm{u_t(s)}_2^2$, 需要对 $p$-laplace 项做分解.
 
 在 \cref{ch:preliminaries},
 我们给出将会用到的一些结果以及技术性引理. 在
@@ -366,7 +380,7 @@ $L^2(\Omega)$ 和 $W_0^{1,p}(\Omega)$ 上的存在性证明.
 在本章中, 我们将介绍泛函空间和一些有用的引理,
 其他文献里有用的结果也将放在这里
 
-现在我们给出加权 sobolev 空间的定义.
+现在我们给出加权 Sobolev 空间的定义.
 $\Omega$ 是 $\R^n$ 里的有界区域, 权重
 $a \colon \R^n \to [0, \infty)$
 是一个非负的局部可和函数.
@@ -374,37 +388,37 @@ $a \colon \R^n \to [0, \infty)$
 	带权 Lebesgue 空间 $L^p(a, \Omega)$, $1 \leq p < \infty$,
 	是由局部可和函数类
 	$u \colon \Omega \to \R$ 在如下范数下定义的 Banach 空间
-	\begin{equation}
+	\begin{equation*}
 		\norm{u}_{L^p(a,\Omega)} =
 		\left( \int_{\Omega}a\abs{u}^p \right)^{\frac{1}{p}}.
-	\end{equation}
+	\end{equation*}
 \end{definition}
 \begin{definition}
 	带权 Sobolev 空间 $W^{k,p}(a,\Omega)$,
 	$1 \leq k < \infty$, $1 \leq p < \infty$,
 	是由 $k$ 阶弱可微局部可和函数
 	$u \colon \Omega \to \R$ 关于如下范数下的 Banach 空间
-	\begin{equation}
+	\begin{equation*}
 		\norm{u}_{W^{k,p}(a,\Omega)} =
 		\left( \int_{\Omega}a\abs{u}^p \right)^{\frac{1}{p}}
 		+ \sum_{\abs{\alpha}=k}
 		\left( \int_{\Omega}a\abs{D^{\alpha}u}^p \right)^{\frac{1}{p}},
-	\end{equation}
+	\end{equation*}
 	这里 $\alpha$ 是一个多指标.
 
 	另外,
 	$W_0^{k,p}(a,\Omega)$ 被定义为
 	$C_0^{\infty}(\Omega)$ 在如下范数下的完备空间
-	\begin{equation}
+	\begin{equation*}
 		\norm{u}_{L^p(a,\Omega)} =
 		\left( \int_{\Omega}a\abs{D^{\alpha}u}^p \right)^{\frac{1}{p}}.
-	\end{equation}
+	\end{equation*}
 \end{definition}
 \begin{remark}
 	一般 $W_0^{k,p}(a,\Omega)$ 在
 	$W^{k,p}(a,\Omega)$ 不紧, 除非 $a$ 满足 Muckenhoupt 条件, 即 $a \in A_{p^-}$. 具体细节见~\cite{goldshteinWeightedSobolevSpaces2009}.
 \end{remark}
-接下来我们给出一个引理用于在证明解的存在性时帮助得到收敛性.
+接下来的引理主要在\cref{thm:absorb}里证明解在$L^2(\Omega)$里的存在性时需要用到.
 \begin{lemma}\label{lem:VecIneq}
 	$\alpha$ 和 $\beta$ 是属于 $\R^{n}$ 的 $n$ 维向量, 如果 $p \geq 4$, 那么我们有
 	\begin{equation}
@@ -421,7 +435,7 @@ $a \colon \R^n \to [0, \infty)$
 	\begin{equation}
 		\abs{\alpha-\beta}^p \leq \abs{\alpha^p - \beta^p}.
 	\end{equation}
-	不是一般性, 假设 $\alpha \leq \beta$, 令
+	不失一般性, 假设 $\alpha \leq \beta$, 令
 	\begin{equation}
 		f(x) = (\beta-\alpha+x)^p - x^p,
 	\end{equation}
@@ -433,7 +447,7 @@ $a \colon \R^n \to [0, \infty)$
 	\begin{equation}
 		\left(\beta-\alpha\right)^p = f(0) \leq f(\alpha) = \beta^p - \alpha^p.
 	\end{equation}
-	另一方面, 应用 jensen 不等式我们得到
+	另一方面, 应用 Jensen 不等式我们得到
 	\begin{equation}
 		\left(\alpha+\beta\right)^p \leq 2^{p-1}\left(\alpha^p + \beta^p\right),
 	\end{equation}
@@ -451,21 +465,21 @@ $a \colon \R^n \to [0, \infty)$
 			&= \left(2^{p-1}+C\right)\abs{\abs{\alpha}^{p-1}\alpha - \abs{\beta}^{p-1}\beta}^2,
 		\end{split}
 	\end{equation}
-	事实上
+	事实上当 $C$ 足够大时
 	\begin{equation}
 		\begin{split}
 			& 2^{p-1}\cos^p{\gamma} + C - \left(2^{p-1}+C\right)\cos{\gamma}\\
 			={} & 2^{p-1}\left(\cos^p{\gamma} - \cos{\gamma}\right) + C\left(1-\cos{\gamma}\right)
-			\geq 0
+			\geq 0.
 		\end{split}
 	\end{equation}
-	当 $C$ 足够大时. 以上我们完整的证明了 \cref{eq:p_ineq}.
+	以上我们完整的证明了 \cref{eq:p_ineq}.
 
 	另一方面, 我们有
 	\begin{equation}
 		\abs{\abs{\beta}^{p-1}\beta - \abs{\alpha}^{p-1}\alpha} \leq p\abs{\beta-\alpha}\int_0^1 \abs{\alpha + t(\beta - \alpha)}^{p-1}dt.
 	\end{equation}
-	注意到, 如果 $p \geq 2$, 我们有
+	注意到, 如果 $p \geq 2$, 则
 	\begin{equation}\label{eq:VecIneq_1}
 		\langle \abs{\alpha}^{p-2}\alpha - \abs{\beta}^{p-2}\beta, \alpha-\beta\rangle
 		\geq \abs{\alpha-\beta}^2\int_0^1 \abs{\beta + t(\alpha - \beta)}^{p-2}dt,
@@ -510,9 +524,9 @@ $a \colon \R^n \to [0, \infty)$
 \chapter{弱解的存在唯一性}\label{ch:Existence_and_uniqueness_of_the_weak_solution}
 本章我们证明在 $L^2(\Omega)$ 下弱解的存在唯一性.
 由于初值在特定条件下方程已经有了适定性 (见 \cref{thm:zhan}),
-我们可以直接使用这些初值逼近 $u_0 \in L^2$.
+我们可以直接使用这些初值逼近 $u_0 \in L^2$, 在这之前还需要将 \cref{thm:zhan} 里的非负解推广到全空间.
 \begin{theorem}\label{thm:absorb}
-	如果 $p>4$ 在~\cref{eq:main}, $a(x)$, $b(x)$ 满足
+	考虑方程\eqref{eq:main}, 如果 $p>4$, $a(x)$, $b(x)$ 满足
 	\begin{equation}
 		\int_{\Omega} b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}} \leq c,
 	\end{equation}
@@ -523,7 +537,7 @@ $a \colon \R^n \to [0, \infty)$
 \end{theorem}
 
 \begin{proof}
-	首先, 我们基于 {\cite{Zhan2019Uniquenessa}} 证明初值 $u_0$ 满足如下条件时解的存在性
+	首先证明初值 $u_0$ 满足如下条件时解的存在性
 	\begin{equation}\label{initial_data_condition_tmp}
 		u_0 \in L^{\infty}(\Omega) \cap W_0^{1, p}(a, \Omega).
 	\end{equation}
@@ -540,8 +554,7 @@ $a \colon \R^n \to [0, \infty)$
 	通过与磨光子作卷积,
 	可以找到一列 $u_{\epsilon,0} \in C_0^\infty(\Omega) $, $au_{\epsilon,0} \to au_0 $ 在 $W_0^{1,p}(\Omega) $,
 	且 $\norm{u_{\epsilon, 0}}_{\infty}$ 一致有界,
-	由极大值原理 $\abs{u_{\epsilon}} \leq C$,
-	其中 $C$ 只与 $\norm{u_0}_{\infty} $ 有关.
+	由极值原理知 $\abs{u_{\epsilon}} \leq C(\norm{u_0}_{\infty})$.
 
 	将 \cref{eq:approximated_maineq} 与 $u_\epsilon$ 作乘积, 并作 $Q_T$ 上的积分, 我们得到
 	\begin{equation}
@@ -551,7 +564,7 @@ $a \colon \R^n \to [0, \infty)$
 			&+\iint_{Q_{T}} b(x)\left|\nabla u_{\epsilon}\right|^{2} u_{\epsilon}  =\frac{1}{2} \int_{\Omega} u_{\epsilon, 0}^{2}.
 		\end{split}
 	\end{equation}
-	下面对每一项依次作估计, 事实上
+	下面对每一项依次作估计. 事实上
 	\begin{equation}
 		\begin{split}
 			\abs{\int_0^T\int_{\Omega} b\abs{\nabla u_{\epsilon}}^2u_{\epsilon}}
@@ -584,14 +597,14 @@ $a \colon \R^n \to [0, \infty)$
 		\end{split}
 	\end{equation}
 	事实上, \cref{eq:iint_adu} 就是 \cite[定理 1.3 式(2.5)]{Zhan2019Uniquenessa},
-	剩下的证明与~\cite[thm 1.3]{Zhan2019Uniquenessa} 的证明相似, 在此略去并给出如下结论:
+	剩下的证明与~\cite[定理 1.3]{Zhan2019Uniquenessa} 的证明相似, 在此略去并给出如下结论:
 	\cref{eq:main} 在初值满足~\eqref{initial_data_condition_tmp} 时具有唯一弱解, 记为 $u$,
 	且 $u \in C([0, T], L^2(\Omega))$.
 
 	接下来我们将初值条件放宽到 $L^2(\Omega)$ 上.
-	选择 $C_c^{\infty}(\Omega) \supset \Brace{u_{n, 0}}_{n=1}^{\infty} $
-	在 $L^2(\Omega) $ 收敛到 $u_0$ 当 $n \to \infty $. $\forall u_{n, 0}$,
-	由第一部分的结论, 存在唯一的弱解 $u_n$ 满足 \cref{eq:main}.
+	取一列 $\Brace{u_{n, 0}}_{n=1}^{\infty} \subset C_c^{\infty}(\Omega)$,
+	当 $n \to \infty $ 时 $u_{n, 0}$ 在 $L^2(\Omega)$ 上收敛到 $u_0$.
+	由第一部分的结论, 存在唯一的弱解 $u_n$ 满足方程 \eqref{eq:main}.
 	于是我们有
 	\begin{equation}
 		\begin{split}
@@ -640,16 +653,14 @@ $a \colon \R^n \to [0, \infty)$
 			+ \int_{\Omega}\left(u_n-u_m\right)^2(0).
 		\end{split}
 	\end{equation}
-	当 $p=4$ 时, 通过 Gr\"onwall's 不等式有
-	\begin{equation}
-		\begin{split}
-			\int_{\Omega}\left( u_n-u_m \right)^2(t)
-			\leq \int_{\Omega}\left(u_n-u_m\right)^2(0)e^{Ct} ,
-		\end{split}
-	\end{equation}
-	对几乎处处 $0 \leq t \leq T$. 当 $p>4$ 时,
-	无法直接使用 Gr\"onwall's 不等式,
-	因为 $\frac{p}{2(p-2)}<1$. 接下来用反证法证明当
+	当 $p>4$ 时,
+	因为 $\frac{p}{2(p-2)}<1$, 无法直接使用 Gr\"onwall's 不等式得到当 $n, m \to \infty$ 时,
+	对于几乎处处的 $0 \leq t \leq T$, 有
+	\begin{equation*}
+		\left(\int_0^t\int_{\Omega}
+			\left(u_n-u_m\right)^2\right)^{\frac{p}{2(p-2)}} \to 0.
+	\end{equation*}
+	为此我们用反证法证明, 当
 	\begin{equation}
 		\int_{\Omega}\left(u_n-u_m\right)^2(0) \to 0
 	\end{equation}
@@ -657,6 +668,7 @@ $a \colon \R^n \to [0, \infty)$
 	\begin{equation}
 		\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2 \to 0.
 	\end{equation}
+
 	假设
 	\begin{equation*}
 		\int_0^t\int_{\Omega}\left(u_n-u_m\right)^2 \not\to 0,
@@ -723,7 +735,7 @@ $a \colon \R^n \to [0, \infty)$
 	\end{equation*}
 
 	最后我们考虑阻尼项, 应用 H\"older 不等式,
-	对任意的 $v \in C_c^\infty$,
+	对任意的 $v \in C_c^\infty$, 当 $n \to \infty$ 时
 	\begin{equation}
 		\begin{split}
 			& \int_0^T\int_{\Omega}b\left(\abs{\nabla u_n}^2
@@ -733,18 +745,17 @@ $a \colon \R^n \to [0, \infty)$
 			- \abs{\nabla u}^{p-2}\nabla u\right)
 			\left(\nabla u_n - \nabla u\right)\right)^{\frac{2}{p}}\\
 			\times{} & \left(\int_0^T\int_{\Omega}b^{\frac{2p}{p-4}}a^{-\frac{4}{p-4}}\right)^{\frac{p-4}{2p}}
-			\left(\int_0^T\int_{\Omega}v^2\right)^{\frac{1}{2}} \to 0
+			\left(\int_0^T\int_{\Omega}v^2\right)^{\frac{1}{2}} \to 0.
 		\end{split}
 	\end{equation}
-	当 $n \to \infty$, 以上我们完成了整个证明.
+	以上我们完成了整个证明.
 \end{proof}
 通过~\cite{Zhan2019Uniquenessa}里相同的方法可以得到唯一性.
-现在我们可以定义解半群 $\Brace{S(t)}_{t>0}$,
-通过
+现在我们可以定义解的连续半群 $\Brace{S(t)}_{t>0}$:
 \begin{equation}
 	S(t)u_0 = u(t),
 \end{equation}
-其中 $S(t)$ 在 $u_{0} \in L^2(\Omega)$ 关于 $t$ 连续.
+其中 $S(t)$ 在 $u_{0} \in L^2(\Omega)$ 上关于 $t$ 连续.
 \chapter{全局吸引子的存在性}\label{ch:existence_of_the_global_attractors}
 \begin{theorem}
 	半群 $\Brace{S(t)}_{t \geq 0} $ 在
@@ -863,7 +874,8 @@ $W_0^{1,p}(\Omega) \subset\subset L^2(\Omega)$
 	$L^2(\Omega)$ 存在全局吸引子 $\mathcal{A}_2$.
 \end{theorem}
 接下来证明 $W_0^{1,p}(\Omega)$ 中全局吸引子的存在性. 首先, 我们需要得到 $u_t$ 在 $L^2(\Omega)$ 中的有界性.
-然而, 当 $\abs{\nabla u}$ 足够小时, 很难证明 $u_t$ 的一致有界性, 因此我们考虑 $\abs{\nabla u}+1$.
+然而, 当 $\abs{\nabla u}$ 足够小时, 很难证明 $u_t$ 的一致有界性,
+因此我们在估计中同时调整 $p$-laplace 项.
 \begin{theorem}\label{thm:ut_L2_bd}
 	对任意有界子集 $B \subset L^2(\Omega)$,
 	存在常数 $T' = T'(B) > 0$, 使得
