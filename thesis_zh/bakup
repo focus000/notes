@@ -1,0 +1,6 @@
+对于抛物型 $p$-laplace 方程的研究最早可追溯到 1985 年 DiBenedetto 和 Friedman 的研究成果以及 1986 年 Wiegner 的研究成果,
+他们先后给出了
+\begin{equation*}
+	u_t = \Div(\abs{\nabla u}^{p - 2}\nabla u)
+\end{equation*}
+解在 $C^{1, \alpha}$ 的正则性, 
