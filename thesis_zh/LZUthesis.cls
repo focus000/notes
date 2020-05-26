@@ -44,7 +44,7 @@
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{CASmthesis}}
 \ProcessOptions
 \LoadClass{CASmthesis}[2005/11/25]
-
+\RequirePackage{pdfpages}
 
 \AtEndOfPackage{\makeatletter\input{LZUthesis.cfg}\makeatother}
 
@@ -136,7 +136,9 @@
     \songti\zihao{-4}
      \begin{flushleft}
       \LZU@label@classification~
-      \CASTunderline[0pt]{\CAST@value@classification}
+      \CASTunderline[0pt]{\CAST@value@classification}\\
+      \LZU@label@serialnumber~
+      \CASTunderline[0pt]{\CAST@value@serialnumber}
        \hskip 9cm
       \LZU@label@confidential~
       \CASTunderline[0pt]{\CAST@value@confidential}
@@ -276,7 +278,7 @@
         \textcolor{light-gray}{
         Typeset by \LaTeXe{} at \CTEX@todayold \\
         With package \texttt{LZUthesis} based on \texttt{CASthesis}{-v0.2} of C\TeX{}.ORG\\
-        给时光以微笑，给岁月以宽容。
+        % 给时光以微笑，给岁月以宽容。
         }
       \end{footnotesize}
     \fi
@@ -292,53 +294,54 @@
 %定义声明
 \newcommand\makestatement{
 \begingroup
-\linespread{1.5}\selectfont
-\thispagestyle{empty}
-\begin{center}
-\textbf{\Large 原~创~性~声~明}
-\par\end{center}{\Large \par}
+\includepdf{./figures/原创性申明.pdf}
+% \linespread{1.5}\selectfont
+% \thispagestyle{empty}
+% \begin{center}
+% \textbf{\Large 原~创~性~声~明}
+% \par\end{center}{\Large \par}
 
-本人郑重声明：本人所呈交的学位论文，是在导师的指导下独立进行研究所取得的成果。学位论文中凡引用他人已经发表或未发表的成果、数据、观点等，均已明确注明出处。除文中已经注明引用的内容外，不包含任何其他个人或集体已经发表或撰写过的科研成果。对本文的研究成果做出重要贡献的个人和集体，均已在 文中以明确方式标明。
+% 本人郑重声明：本人所呈交的学位论文，是在导师的指导下独立进行研究所取得的成果。学位论文中凡引用他人已经发表或未发表的成果、数据、观点等，均已明确注明出处。除文中已经注明引用的内容外，不包含任何其他个人或集体已经发表或撰写过的科研成果。对本文的研究成果做出重要贡献的个人和集体，均已在 文中以明确方式标明。
 
-本声明的法律责任由本人承担。
+% 本声明的法律责任由本人承担。
 
-\vskip 1.5cm
+% \vskip 1.5cm
 
-\begin{center}
-\begin{tabular}{clcl}
-论\hfill{}文\hfill{}作\hfill{}者\hfill{}签\hfill{}名 ： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{} & \quad{}\quad{}\quad{}\quad{}日\hfill{}期： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\tabularnewline
-\cline{2-2} \cline{4-4}
- &  &  & \tabularnewline
-\end{tabular}
-\par\end{center}
+% \begin{center}
+% \begin{tabular}{clcl}
+% 论\hfill{}文\hfill{}作\hfill{}者\hfill{}签\hfill{}名 ： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{} & \quad{}\quad{}\quad{}\quad{}日\hfill{}期： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\tabularnewline
+% \cline{2-2} \cline{4-4}
+%  &  &  & \tabularnewline
+% \end{tabular}
+% \par\end{center}
 
-\vskip 1.5cm
+% \vskip 1.5cm
 
-\begin{center}
-\textbf{\Large 关于学位论文使用授权的声明}{\Large{} }
-\par\end{center}{\Large \par}
+% \begin{center}
+% \textbf{\Large 关于学位论文使用授权的声明}{\Large{} }
+% \par\end{center}{\Large \par}
 
-本人在导师指导下所完成的论文及相关的职务作品，知识产权归属兰州大学。本人完全了解兰州大学有关保存、使用学位论文的规定， 同意学校保存或向国家有关部门或机构送交论文的纸质版和电子版，允许论文被查阅和借阅；本人授权兰州大学可以将本学位论文的
-全部或部分内容编入有关数据库进行检索，可以采用任何复制手段保存和汇编本学位论文。本人离校后发表、使用学位论文或与该论 文直接相关的学术论文或成果时，第一署名单位仍然为兰州大学。
+% 本人在导师指导下所完成的论文及相关的职务作品，知识产权归属兰州大学。本人完全了解兰州大学有关保存、使用学位论文的规定， 同意学校保存或向国家有关部门或机构送交论文的纸质版和电子版，允许论文被查阅和借阅；本人授权兰州大学可以将本学位论文的
+% 全部或部分内容编入有关数据库进行检索，可以采用任何复制手段保存和汇编本学位论文。本人离校后发表、使用学位论文或与该论 文直接相关的学术论文或成果时，第一署名单位仍然为兰州大学。
 
-本学位论文研究内容：
+% 本学位论文研究内容：
 
-$\square$ 可以公开
+% $\square$ 可以公开
 
-$\square$ 不宜公开，已在学位办公室办理保密申请，解密后适用本授权书。
+% $\square$ 不宜公开，已在学位办公室办理保密申请，解密后适用本授权书。
 
-（请在以上选项内选择其中一项打“$\surd$”）
+% （请在以上选项内选择其中一项打“$\surd$”）
 
-\vskip 1.5cm
-\renewcommand\arraystretch{0.76}
-\begin{tabular}{clcl}
-论\hfill{}文\hfill{}作\hfill{}者\hfill{}签\hfill{}名 ： &  \quad{}\quad{}\quad{}\quad{}\quad{}\quad{} & \quad{}\quad{}\quad{}\quad{}导\hfill{}师\hfill{}签\hfill{}名 ： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\tabularnewline
-\cline{2-2} \cline{4-4}
- &  &  & \tabularnewline
-日\hfill{}期： &  \quad{}\quad{}\quad{}\quad{}\quad{}\quad{} & \quad{}\quad{}\quad{}\quad{}日\hfill{}期： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\tabularnewline
-\cline{2-2} \cline{4-4}
- &  &  & \tabularnewline
-\end{tabular}
+% \vskip 1.5cm
+% \renewcommand\arraystretch{0.76}
+% \begin{tabular}{clcl}
+% 论\hfill{}文\hfill{}作\hfill{}者\hfill{}签\hfill{}名 ： &  \quad{}\quad{}\quad{}\quad{}\quad{}\quad{} & \quad{}\quad{}\quad{}\quad{}导\hfill{}师\hfill{}签\hfill{}名 ： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\tabularnewline
+% \cline{2-2} \cline{4-4}
+%  &  &  & \tabularnewline
+% 日\hfill{}期： &  \quad{}\quad{}\quad{}\quad{}\quad{}\quad{} & \quad{}\quad{}\quad{}\quad{}日\hfill{}期： & \quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\quad{}\tabularnewline
+% \cline{2-2} \cline{4-4}
+%  &  &  & \tabularnewline
+% \end{tabular}
 
   \clearpage
   \if@twoside
