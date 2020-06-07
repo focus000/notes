@@ -117,8 +117,8 @@
 \begin{document}
 
 %分类号；一般不要求学生填写
-\classification{}
-\serialnumber{}
+\classification{0193}
+\serialnumber{10730}
 
 %密级；申请保密后需填写
 \confidential{}
@@ -547,16 +547,17 @@ $a \colon \R^n \to [0, \infty)$
 	\end{equation*}
 \end{lemma}
 \begin{proof}
-	\begin{equation*}
+	易证下面的不等式成立,
+	\begin{equation}\label{eq:VecIneq_0}
 		\abs{\abs{\beta}^{p-1}\beta - \abs{\alpha}^{p-1}\alpha} \leq p\abs{\beta-\alpha}\int_0^1 \abs{\alpha + t(\beta - \alpha)}^{p-1}dt.
-	\end{equation*}
+	\end{equation}
 	在~\cite{lindqvistNotesStationaryPLaplace2019}中, 作者证明了当 $p \geq 2$ 时, 
 	\begin{equation}\label{eq:VecIneq_1}
 		\langle \abs{\alpha}^{p-2}\alpha - \abs{\beta}^{p-2}\beta, \alpha-\beta\rangle
 		\geq \abs{\alpha-\beta}^2\int_0^1 \abs{\beta + t(\alpha - \beta)}^{p-2}dt.
 	\end{equation}
 	成立.
-	因此当 $p \geq 4$ 时, 结合 \cref{eq:p_ineq} 有
+	因此当 $p \geq 4$ 时, 结合 \cref{eq:p_ineq,eq:VecIneq_0,eq:VecIneq_1} 有
 	\begin{equation*}
 		\begin{split}
 			\abs{\alpha^2 - \beta^2}^{\frac{p}{2}}
@@ -582,7 +583,7 @@ $a \colon \R^n \to [0, \infty)$
 	且对于 $\forall \phi \in L^p(0, T; W_0^{1,p}(a,\Omega))\cap L^{\frac{p}{p-2}}(Q_T)$ 有
 	\begin{equation*}
 		\int_0^T <u_t, \phi> + \int_0^T\int_\Omega a(x)\abs{\nabla u}^{p - 2}\nabla u \cdot \nabla \phi
-		+ \int_0^T\int_\Omega b(x)\abs{\nabla u}^2\phi.
+		+ \int_0^T\int_\Omega b(x)\abs{\nabla u}^2\phi = 0.
 	\end{equation*}
 	其中对于 $u(0, x) = u_0$ 在 $\Omega$ 上几乎处处成立.
 \end{definition}
