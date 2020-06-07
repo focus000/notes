@@ -178,7 +178,7 @@
       {\CASTunderline[297pt]{\CAST@value@degreedate}}
     \end{tabular}
 
-      \vskip 1.5 cm
+      \vskip 1.0 cm
       \zihao{5}\LZU@label@schooladdress
   \end{center}
   \clearpage
@@ -217,6 +217,8 @@
   \begin{center}
   \begin{flushleft}
     \songti\zihao{-4}
+    \LZU@label@serialnumber~
+      \CASTunderline[0pt]{\CAST@value@serialnumber}\\
       \LZU@label@classification~
       \CASTunderline[0pt]{\CAST@value@classification}
         \hskip 9cm
@@ -263,7 +265,7 @@
       \multicolumn{4}{l}{\CASTunderline[297pt]{\CAST@value@degreedate}}
 
     \end{tabular}
-      \vskip 1.4 cm
+      \vskip 1.0 cm
       \zihao{5}\LZU@label@schooladdress
   \end{center}
 
